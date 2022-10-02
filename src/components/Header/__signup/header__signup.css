@@ -1,0 +1,11 @@
+.header__signup {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-decoration: none;
+    color: #fff;
+}
+
+.header__signup:hover {
+    opacity: .6;
+}

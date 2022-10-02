@@ -1,0 +1,5 @@
+.header__profile-links {
+    display: flex;
+    margin: 21px 70px auto;
+    align-items: center;
+}
