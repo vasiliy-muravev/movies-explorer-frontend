@@ -12,3 +12,11 @@
 @import url(./components/Header/__profile-name/header__profile-name.css);
 @import url(./components/Header/__signup/header__signup.css);
 @import url(./components/Header/__signin/header__signin.css);
+@import url(./components/Intro/Intro.css);
+@import url(./components/Intro/__about/intro__about.css);
+@import url(./components/Intro/__about-text/intro__about-text.css);
+@import url(./components/Intro/__about-title/intro__about-title.css);
+@import url(./components/Intro/__about-subtitle/intro__about-subtitle.css);
+@import url(./components/Intro/__about-logo/intro__about-logo.css);
+@import url(./components/Intro/__more/intro__more.css);
+@import url(./components/Intro/__more-button/intro__more-button.css);

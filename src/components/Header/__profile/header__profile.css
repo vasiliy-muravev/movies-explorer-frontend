@@ -3,4 +3,9 @@
     border: 2px solid rgba(170, 170, 170, .2);
     border-radius: 50px;
     box-sizing: border-box;
+    cursor: pointer;
+}
+
+.header__profile:hover {
+    opacity: .6;
 }

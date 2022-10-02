@@ -1,0 +1,9 @@
+.intro__about-subtitle {
+    margin: 36px 0 0 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.23;
+    color: #fff;
+    opacity: 0.5;
+    max-width: 310px;
+}
