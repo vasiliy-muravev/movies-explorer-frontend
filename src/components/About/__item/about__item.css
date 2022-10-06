@@ -1,0 +1,4 @@
+.about__item:first-child {
+    margin-right: 40px;
+    min-height: 90px;
+}

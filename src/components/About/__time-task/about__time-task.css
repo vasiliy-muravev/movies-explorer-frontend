@@ -1,0 +1,10 @@
+.about__time-task {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #8B8B8B;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

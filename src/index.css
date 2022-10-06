@@ -20,3 +20,14 @@
 @import url(./components/Intro/__about-logo/intro__about-logo.css);
 @import url(./components/Intro/__more/intro__more.css);
 @import url(./components/Intro/__more-button/intro__more-button.css);
+@import url(./components/About/About.css);
+@import url(./components/About/__title/about__title.css);
+@import url(./components/About/__line/about__line.css);
+@import url(./components/About/__items/about__items.css);
+@import url(./components/About/__item/about__item.css);
+@import url(./components/About/__item-title/about__item-title.css);
+@import url(./components/About/__item-subtitle/about__item-subtitle.css);
+@import url(./components/About/__time/about__time.css);
+@import url(components/About/__time-backend/about__time-backend.css);
+@import url(components/About/__time-frontend/about__time-frontend.css);
+@import url(components/About/__time-task/about__time-task.css);

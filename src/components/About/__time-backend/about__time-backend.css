@@ -1,0 +1,11 @@
+.about__time-backend {
+    background-color: #3DDC84;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #000;
+}
