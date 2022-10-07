@@ -31,3 +31,11 @@
 @import url(components/About/__time-backend/about__time-backend.css);
 @import url(components/About/__time-frontend/about__time-frontend.css);
 @import url(components/About/__time-task/about__time-task.css);
+@import url(components/Technology/Technology.css);
+@import url(components/Technology/__line/technology__line.css);
+@import url(components/Technology/__title/technology__title.css);
+@import url(components/Technology/__items/technology__items.css);
+@import url(components/Technology/__item-title/technology__item-title.css);
+@import url(components/Technology/__item-subtitle/technology__item-subtitle.css);
+@import url(components/Technology/__item-technics/technology__item-technics.css);
+@import url(components/Technology/__item-value/technology__item-value.css);

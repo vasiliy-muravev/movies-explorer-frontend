@@ -1,0 +1,19 @@
+.technology__item-value {
+    list-style-type: none;
+    height: 60px;
+    width: 90px;
+    background: #303030;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    letter-spacing: -0.04em;
+}
+
+.technology__item-value:not(:last-child) {
+    margin-right: 10px;
+}
