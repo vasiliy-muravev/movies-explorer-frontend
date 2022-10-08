@@ -1,0 +1,8 @@
+.movies {
+    min-height: 1452px;
+    background-color: #202020;
+    padding: 0 70px;
+    display: grid;
+    grid-gap: 32px 28px;
+    grid-template-columns: repeat(3, 1fr);
+}

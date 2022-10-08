@@ -1,0 +1,11 @@
+.movie__like-button {
+    border-radius: 30px;
+    width: 100px;
+    height: 29px;
+    border: none;
+    cursor: pointer;
+}
+
+.movie__like-button:hover {
+    opacity: .6;
+}

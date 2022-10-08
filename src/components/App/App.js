@@ -9,9 +9,26 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Redact from '../Redact/Redact';
 import Search from '../Search/Search';
-import {Redirect, Route, Switch} from "react-router-dom";
+import Movies from '../Movies/Movies';
+import UserMovies from '../UserMovies/UserMovies';
+import {Redirect, Route, Switch} from 'react-router-dom';
+import {useState} from 'react';
+import React from 'react';
+import {api} from '../utils/Api';
 
 function App() {
+    /* Начальное состояние стейт переменных - закрыты */
+    const [movies, setMovieState] = useState([]);
+
+    /* Передаем массив с карточками в card */
+    React.useEffect(() => {
+        api.getInitialCards().then((moviesData) => {
+            setMovieState(moviesData);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, []);
+
     return (
         <div className="app">
             <Switch>
@@ -26,11 +43,13 @@ function App() {
                 <Route path="/movies">
                     <Header/>
                     <Search/>
+                    <Movies movies={movies.slice(0, 12)}/>
                     <Footer/>
                 </Route>
                 <Route path="/saved-movies">
                     <Header/>
                     <Search/>
+                    <UserMovies/>
                     <Footer/>
                 </Route>
                 <Route path="/sign-up">
