@@ -66,3 +66,13 @@
 @import url(components/Footer/__links/footer__links.css);
 @import url(components/Footer/__link-item/footer__link-item.css);
 @import url(components/Footer/__link/footer__link.css);
+@import url(components/Search/Search.css);
+@import url(components/Search/__items/search__items.css);
+@import url(components/Search/__input-item/search__input-item.css);
+@import url(components/Search/__input/search__input.css);
+@import url(components/Search/__input-submit/search__input-submit.css);
+@import url(components/Search/__checkbox-item/search__checkbox-item.css);
+@import url(components/Search/__checkbox-title/search__checkbox-title.css);
+@import url(components/Search/__checkbox/search__checkbox.css);
+@import url(components/Search/__checkbox-slider/search__checkbox-slider.css);
+@import url(components/Search/__line/search__line.css);

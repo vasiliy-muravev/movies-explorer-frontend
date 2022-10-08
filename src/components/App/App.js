@@ -30,6 +30,7 @@ function App() {
                 </Route>
                 <Route path="/saved-movies">
                     <Header/>
+                    <Search/>
                     <Footer/>
                 </Route>
                 <Route path="/sign-up">

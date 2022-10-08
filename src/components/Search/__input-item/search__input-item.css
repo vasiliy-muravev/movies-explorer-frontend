@@ -1,0 +1,9 @@
+.search__input-item {
+    width: 100%;
+    border: 1.5px solid rgba(170, 170, 170, .2);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
