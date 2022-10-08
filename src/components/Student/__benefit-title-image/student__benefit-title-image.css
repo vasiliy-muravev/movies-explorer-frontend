@@ -1,0 +1,9 @@
+.student__benefit-title-image {
+    background-image: url(../../../images/arrow.svg);
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #fff;
+    margin: 16px 8px 6px 8px;
+}

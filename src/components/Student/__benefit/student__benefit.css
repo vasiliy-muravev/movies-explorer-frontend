@@ -1,0 +1,7 @@
+.student__benefit {
+    list-style-type: none;
+}
+
+.student__benefit:not(:last-child) {
+    margin-bottom: 20px;
+}

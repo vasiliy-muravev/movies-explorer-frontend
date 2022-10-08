@@ -1,5 +1,5 @@
 .about__time {
-    margin: 110px 70px;
+    margin: 110px 0;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 1fr 4fr;

@@ -1,8 +1,9 @@
 .technology__title {
-    margin: 0 auto 23px 70px;
+    margin: 0 auto 23px 0;
     padding-top: 100px;
     font-weight: 400;
     font-size: 22px;
     line-height: 1.22;
     color: #fff;
+    letter-spacing: -0.04em;
 }
