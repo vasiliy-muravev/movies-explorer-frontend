@@ -1,0 +1,5 @@
+.movies__items {
+    display: grid;
+    grid-gap: 32px 28px;
+    grid-template-columns: repeat(3, 1fr);
+}

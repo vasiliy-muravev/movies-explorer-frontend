@@ -1,0 +1,5 @@
+.movies__show-more-item {
+    min-height: 166px;
+    display: flex;
+    justify-content: center;
+}

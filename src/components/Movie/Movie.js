@@ -1,6 +1,17 @@
 import React from 'react';
 
-function Movie({movie}) {
+function Movie({movie, isUserMovies}) {
+    let btnClass;
+    let btnText;
+
+    if (isUserMovies) {
+        btnClass = 'movie__like-button-delete';
+        btnText = '';
+    } else {
+        btnClass = movie.id % 2 ? 'movie__like-button-liked' : 'movie__like-button-unliked';
+        btnText = movie.id % 2 ? '' : 'Сохранить';
+    }
+
     return (
         <article className="movie" id={movie.id}>
             <div className="movie__title">
@@ -10,9 +21,8 @@ function Movie({movie}) {
             <img className="movie__title-image" alt={movie.nameRU}
                  src={`https://api.nomoreparties.co${movie.image.url}`}/>
             <div className="movie__like-button-item">
-                <button className={`movie__like-button ${movie.id % 2 ?
-                    'movie__like-button-liked' : 'movie__like-button-unliked'}`}>
-                    {movie.id % 2 ? '' : 'Сохранить'}
+                <button className={`movie__like-button ${btnClass}`}>
+                    {btnText}
                 </button>
             </div>
         </article>

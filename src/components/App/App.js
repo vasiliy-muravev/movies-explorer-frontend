@@ -43,13 +43,13 @@ function App() {
                 <Route path="/movies">
                     <Header/>
                     <Search/>
-                    <Movies movies={movies.slice(0, 12)}/>
+                    <Movies movies={movies.slice(0, 12)} isUserMovies={false}/>
                     <Footer/>
                 </Route>
                 <Route path="/saved-movies">
                     <Header/>
                     <Search/>
-                    <UserMovies/>
+                    <UserMovies movies={movies.slice(0, 3)} isUserMovies={true}/>
                     <Footer/>
                 </Route>
                 <Route path="/sign-up">

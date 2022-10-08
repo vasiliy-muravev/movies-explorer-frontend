@@ -77,6 +77,9 @@
 @import url(components/Search/__checkbox-slider/search__checkbox-slider.css);
 @import url(components/Search/__line/search__line.css);
 @import url(components/Movies/Movies.css);
+@import url(components/Movies/__items/movies__items.css);
+@import url(components/Movies/__show-more-item/movies__show-more-item.css);
+@import url(components/Movies/__show-more/movies__show-more.css);
 @import url(components/Movie/Movie.css);
 @import url(components/Movie/__title/movie__title.css);
 @import url(components/Movie/__title-text/movie__title-text.css);
@@ -86,3 +89,6 @@
 @import url(components/Movie/__like-button/movie__like-button.css);
 @import url(components/Movie/__like-button/_liked/movie__like-button-liked.css);
 @import url(components/Movie/__like-button/_unliked/movie__like-button-unliked.css);
+@import url(components/Movie/__like-button/_delete/movie__like-button-delete.css);
+@import url(components/UserMovies/UserMovies.css);
+
