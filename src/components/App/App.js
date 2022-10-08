@@ -4,6 +4,7 @@ import Intro from '../Intro/Intro';
 import About from '../About/About';
 import Technology from '../Technology/Technology';
 import Student from '../Student/Student';
+import Footer from '../Footer/Footer';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
             <About />
             <Technology />
             <Student />
+            <Footer />
         </div>
     );
 }

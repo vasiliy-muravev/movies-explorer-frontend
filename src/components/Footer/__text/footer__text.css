@@ -1,0 +1,8 @@
+.footer__text {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.23;
+    margin-top: 20px;
+}

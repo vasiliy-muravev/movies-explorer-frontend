@@ -1,0 +1,7 @@
+.footer__link-item {
+    list-style-type: none;
+}
+
+.footer__link-item:not(:last-child) {
+    margin-right: 20px;
+}
