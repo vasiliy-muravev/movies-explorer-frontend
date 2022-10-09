@@ -6,10 +6,10 @@ function Auth() {
         <div className="header__profile-links">
             <Link to="/signup" className="header__signup">Регистрация</Link>
             <button className="header__signin">Войти</button>
-            <div className="header__profile">
+            <Link  to="/redact" className="header__profile">
                 <div className="header__profile-logo"></div>
                 <span className="header__profile-name">Аккаунт</span>
-            </div>
+            </Link>
         </div>
     )
 }

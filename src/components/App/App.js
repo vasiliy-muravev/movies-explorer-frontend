@@ -20,12 +20,16 @@ import {api} from '../utils/Api';
 function App() {
     /* Начальное состояние стейт переменных - закрыты */
     const [movies, setMovieState] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     /* Передаем массив с карточками в card */
     React.useEffect(() => {
+        setIsLoading(true);
         api.getInitialCards().then((moviesData) => {
             setMovieState(moviesData);
+            setIsLoading(false);
         }).catch((err) => {
+
             console.log(err);
         });
     }, []);
@@ -44,13 +48,13 @@ function App() {
                 <Route path="/movies">
                     <Header/>
                     <Search/>
-                    <Movies movies={movies.slice(0, 12)} isUserMovies={false}/>
+                    <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
                     <Footer/>
                 </Route>
                 <Route path="/saved-movies">
                     <Header/>
                     <Search/>
-                    <UserMovies movies={movies.slice(0, 3)} isUserMovies={true}/>
+                    <UserMovies movies={movies.slice(0, 3)} isUserMovies={true} isLoading={isLoading}/>
                     <Footer/>
                 </Route>
                 <Route path="/sign-up">
@@ -60,7 +64,9 @@ function App() {
                     <Login/>
                 </Route>
                 <Route path="/redact">
+                    <Header/>
                     <Redact/>
+                    <Footer/>
                 </Route>
                 <Route path="/not-found">
                     <NotFound/>

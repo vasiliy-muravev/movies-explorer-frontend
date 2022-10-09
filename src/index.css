@@ -95,4 +95,5 @@
 @import url(components/NotFound/__title/not-found__title.css);
 @import url(components/NotFound/__subtitle/not-found__subtitle.css);
 @import url(components/NotFound/__back-link/not-found__back-link.css);
+@import url(components/Preloader/Preloader.css);
 
