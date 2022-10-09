@@ -11,6 +11,7 @@ import Redact from '../Redact/Redact';
 import Search from '../Search/Search';
 import Movies from '../Movies/Movies';
 import UserMovies from '../UserMovies/UserMovies';
+import NotFound from '../NotFound/NotFound';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {useState} from 'react';
 import React from 'react';
@@ -60,6 +61,9 @@ function App() {
                 </Route>
                 <Route path="/redact">
                     <Redact/>
+                </Route>
+                <Route path="/not-found">
+                    <NotFound/>
                 </Route>
                 <Route path="/*">
                     <Redirect to="/not-found"/>

@@ -1,0 +1,11 @@
+.not-found__back-link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #4285F4;
+    text-decoration: none;
+}
+
+.not-found__back-link:hover {
+    opacity: .6;
+}

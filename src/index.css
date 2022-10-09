@@ -91,4 +91,8 @@
 @import url(components/Movie/__like-button/_unliked/movie__like-button-unliked.css);
 @import url(components/Movie/__like-button/_delete/movie__like-button-delete.css);
 @import url(components/UserMovies/UserMovies.css);
+@import url(components/NotFound/NotFound.css);
+@import url(components/NotFound/__title/not-found__title.css);
+@import url(components/NotFound/__subtitle/not-found__subtitle.css);
+@import url(components/NotFound/__back-link/not-found__back-link.css);
 
