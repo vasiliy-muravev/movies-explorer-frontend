@@ -5,7 +5,7 @@ function Intro() {
         <div className="intro">
             <div className="intro__about">
                 <div className="intro__about-text">
-                    <p className="intro__about-title">Учебный проект студента факультета Веб&#8209;разработки.</p>
+                    <h1 className="intro__about-title">Учебный проект студента факультета Веб&#8209;разработки.</h1>
                     <p className="intro__about-subtitle">
                         Листайте ниже, чтобы узнать больше про этот проект и его создателя.
                     </p>

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 function Student() {
     return (
         <div className="student">
-            <div className="student__title">Студент</div>
+            <h2 className="student__title">Студент</h2>
             <div className="student__line"></div>
             <div className="student__info">
                 <div className="student__info-detail">

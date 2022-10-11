@@ -66,7 +66,6 @@ function App() {
                 <Route path="/redact">
                     <Header/>
                     <Redact/>
-                    <Footer/>
                 </Route>
                 <Route path="/not-found">
                     <NotFound/>

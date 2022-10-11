@@ -1,0 +1,14 @@
+.redact__form-submit-btn {
+    margin: 220px auto 16px auto;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.23;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+.redact__form-submit-btn:hover {
+    opacity: .6;
+}

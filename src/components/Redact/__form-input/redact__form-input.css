@@ -1,0 +1,10 @@
+.redact__form-input {
+    border: unset;
+    outline: 0;
+    text-align: right;
+    background: none;
+    color: #fff;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.18;
+}

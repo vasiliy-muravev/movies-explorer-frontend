@@ -1,3 +1,7 @@
 .redact {
-
+    min-height: 626px;
+    background-color: #202020;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

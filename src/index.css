@@ -96,4 +96,13 @@
 @import url(components/NotFound/__subtitle/not-found__subtitle.css);
 @import url(components/NotFound/__back-link/not-found__back-link.css);
 @import url(components/Preloader/Preloader.css);
+@import url(components/Redact/Redact.css);
+@import url(components/Redact/__title/redact__title.css);
+@import url(components/Redact/__form/redact__form.css);
+@import url(components/Redact/__form-submit-btn/redact__form-submit-btn.css);
+@import url(components/Redact/__logout/redact__logout.css);
+@import url(components/Redact/__form-input/redact__form-input.css);
+@import url(components/Redact/__form-input-title/redact__form-input-title.css);
+@import url(components/Redact/__form-input-item/redact__form-input-item.css);
+@import url(components/Redact/__form-line/redact__form-line.css);
 
