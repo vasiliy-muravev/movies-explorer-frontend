@@ -8,11 +8,13 @@ function Search() {
                     <input type="text" className="search__input" placeholder="Фильм"></input>
                     <button className="search__input-submit">Найти</button>
                 </label>
-                <p className="search__checkbox-title">Короткометражки</p>
-                <label className="search__checkbox-item">
-                    <input type="checkbox" className="search__checkbox"/>
-                    <span className="search__checkbox-slider"></span>
-                </label>
+                <div className="search__checkbox-group">
+                    <p className="search__checkbox-title">Короткометражки</p>
+                    <label className="search__checkbox-item">
+                        <input type="checkbox" className="search__checkbox"/>
+                        <span className="search__checkbox-slider"></span>
+                    </label>
+                </div>
             </div>
             <div className="search__line"></div>
         </div>

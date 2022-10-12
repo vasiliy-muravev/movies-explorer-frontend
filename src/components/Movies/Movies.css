@@ -2,3 +2,9 @@
     background-color: #202020;
     padding: 70px 70px 0 70px;
 }
+
+@media screen and (max-width: 1023px) {
+    .movies {
+        padding: 70px 30px 0 30px;
+    }
+}

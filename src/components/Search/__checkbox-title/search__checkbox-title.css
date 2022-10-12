@@ -5,3 +5,9 @@
     color: #fff;
     margin: auto 14px auto 41px;
 }
+
+@media screen and (max-width: 1023px) {
+    .search__checkbox-title {
+        margin: auto 12px auto auto;
+    }
+}
