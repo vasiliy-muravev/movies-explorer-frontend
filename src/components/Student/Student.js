@@ -27,14 +27,14 @@ function Student() {
                         <div className="student__benefit-title-text">Статичный сайт</div>
                         <div className="student__benefit-title-image"></div>
                     </div>
-                    <div className="student__line student__line_benefit"></div>
+                    <div className="student__line"></div>
                 </li>
                 <li className="student__benefit">
                     <div className="student__benefit-title">
                         <div className="student__benefit-title-text">Адаптивный сайт</div>
                         <div className="student__benefit-title-image"></div>
                     </div>
-                    <div className="student__line student__line_benefit"></div>
+                    <div className="student__line"></div>
                 </li>
                 <li className="student__benefit">
                     <div className="student__benefit-title">

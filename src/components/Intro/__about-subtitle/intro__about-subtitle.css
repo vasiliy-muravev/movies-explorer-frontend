@@ -7,3 +7,14 @@
     opacity: 0.5;
     max-width: 310px;
 }
+
+@media screen and (max-width: 1023px) {
+    .intro__about-subtitle {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 1.23;
+        text-align: center;
+        mix-blend-mode: normal;
+        margin: 22px auto 0 auto;
+    }
+}

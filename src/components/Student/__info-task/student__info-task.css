@@ -4,3 +4,10 @@
     line-height: 1.11;
     margin: 0;
 }
+
+@media screen and (max-width: 1023px) {
+    .student__info-task {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}

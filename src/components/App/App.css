@@ -8,3 +8,9 @@
     text-rendering: optimizeLegibility;
     background-color: #202020;
 }
+
+@media screen and (max-width: 1023px) {
+    .app {
+        max-width: 1023px;
+    }
+}

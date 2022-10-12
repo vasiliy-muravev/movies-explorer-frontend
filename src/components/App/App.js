@@ -38,7 +38,7 @@ function App() {
         <div className="app">
             <Switch>
                 <Route exact path="/">
-                    <Header/>
+                    <Header loggedIn={false}/>
                     <Intro/>
                     <About/>
                     <Technology/>
@@ -46,7 +46,7 @@ function App() {
                     <Footer/>
                 </Route>
                 <Route path="/movies">
-                    <Header/>
+                    <Header loggedIn={true}/>
                     <Search/>
                     <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
                     <Footer/>

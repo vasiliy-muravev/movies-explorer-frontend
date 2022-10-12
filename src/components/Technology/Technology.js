@@ -11,7 +11,7 @@ function Technology() {
                     На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.
                 </p>
                 <ul className="technology__item-technics">
-                    <li className="technology__item-value"><span>HTML</span></li>
+                    <li className="technology__item-value">HTML</li>
                     <li className="technology__item-value">CSS</li>
                     <li className="technology__item-value">JS</li>
                     <li className="technology__item-value">React</li>

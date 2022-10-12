@@ -7,3 +7,10 @@
     color: #fff;
     margin: 16px 8px 6px 8px;
 }
+
+@media screen and (max-width: 1023px) {
+    .student__benefit-title-image {
+        width: 15px;
+        height: 15px;
+    }
+}

@@ -3,3 +3,11 @@
     max-height: 327px;
     width: 100%;
 }
+
+@media screen and (max-width: 1023px) {
+    .student__image {
+        max-width: 255px;
+        max-height: 307px;
+        margin-left: 49px;
+    }
+}
