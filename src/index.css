@@ -3,6 +3,7 @@
 @import url(./components/App/App.css);
 @import url(./components/Header/Header.css);
 @import url(./components/Header/__logo/header__logo.css);
+@import url(./components/Header/__logo/_auth-header/header__logo_auth-header.css);
 @import url(./components/Header/__links/header__links.css);
 @import url(./components/Header/__nav/header__nav.css);
 @import url(./components/Header/__link-item/header__link-item.css);
@@ -105,4 +106,19 @@
 @import url(components/Redact/__form-input-title/redact__form-input-title.css);
 @import url(components/Redact/__form-input-item/redact__form-input-item.css);
 @import url(components/Redact/__form-line/redact__form-line.css);
+@import url(components/Register/Register.css);
+@import url(components/Register/__form/register__form.css);
+@import url(components/Login/Login.css);
+@import url(components/Login/__form/login__form.css);
+@import url(components/AuthHeader/AuthHeader.css);
+@import url(components/AuthHeader/__title/auth-header__title.css);
+@import url(components/AuthField/AuthField.css);
+@import url(components/AuthField/__form-input-title/auth-field__form-input-title.css);
+@import url(components/AuthField/__form-input/auth-field__form-input.css);
+@import url(components/AuthField/__form-input/_failed-validation/auth-field__form-input_failed-validation.css);
+@import url(components/AuthField/__form-input-error/auth-field__form-input-error.css);
+@import url(components/AuthSubmit/AuthSubmit.css);
+@import url(components/AuthFooter/AuthFooter.css);
+@import url(components/AuthFooter/__title/auth-footer__title.css);
+@import url(components/AuthFooter/__link/auth-footer__link.css);
 
