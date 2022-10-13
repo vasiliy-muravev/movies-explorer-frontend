@@ -1,5 +1,5 @@
 .header__signin {
-    margin-left: 50px;
+    margin-left: 30px;
     background: #3DDC84;
     border-radius: 3px;
     width: 76px;
@@ -13,4 +13,14 @@
 
 .header__signin:hover {
     opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+    .header__signin {
+        margin-left: 14px;
+        font-size: 10px;
+        line-height: 1.6;
+        width: 54px;
+        height: 26px;
+    }
 }

@@ -11,3 +11,10 @@
         line-height: 1.5;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .about__item-subtitle {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+}

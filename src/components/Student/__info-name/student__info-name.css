@@ -10,5 +10,14 @@
     .student__info-name {
         font-size: 40px;
         line-height: 1;
+        margin: 0 auto 16px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .student__info-name {
+        font-size: 30px;
+        line-height: 1.2;
+        margin: 0 auto 20px 0;
     }
 }

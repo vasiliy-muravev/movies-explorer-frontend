@@ -9,3 +9,10 @@
     line-height: 1.21;
     color: #fff;
 }
+
+@media screen and (max-width: 767px) {
+    .about__time-frontend {
+        font-size: 11px;
+        line-height: 1.18;
+    }
+}

@@ -8,9 +8,15 @@
 
 @media screen and (max-width: 1023px) {
     .intro__about-title {
-        font-weight: 400;
         font-size: 40px;
         line-height: 1.25;
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .intro__about-title {
+        font-size: 30px;
+        line-height: 1.11;
     }
 }

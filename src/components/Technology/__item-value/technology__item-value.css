@@ -26,3 +26,9 @@
         width: 84px;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .technology__item-value:not(:last-child) {
+        margin-right: 0;
+    }
+}

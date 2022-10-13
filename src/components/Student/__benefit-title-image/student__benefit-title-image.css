@@ -14,3 +14,11 @@
         height: 15px;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .student__benefit-title-image {
+        width: 13px;
+        height: 13px;
+        margin: 8px 8px 6px 8px;
+    }
+}

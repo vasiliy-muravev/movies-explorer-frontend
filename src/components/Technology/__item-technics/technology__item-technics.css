@@ -5,3 +5,11 @@
     text-align: center;
     vertical-align: center;
 }
+
+@media screen and (max-width: 767px) {
+    .technology__item-technics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+}

@@ -7,3 +7,9 @@
         border-color: #E6E6E6;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .student__line {
+        margin-top: 19px;
+    }
+}

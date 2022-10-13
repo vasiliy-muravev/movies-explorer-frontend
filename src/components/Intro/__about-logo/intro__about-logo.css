@@ -12,3 +12,11 @@
         margin: 140px auto 48px auto;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .intro__about-logo {
+        max-width: 210px;
+        max-height: 206px;
+        margin: 70px auto 44px auto;
+    }
+}

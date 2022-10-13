@@ -10,7 +10,7 @@ function Footer() {
             <div className="footer__line"></div>
             <div className="footer__text">
                 <p className="footer__copyright">&copy; {date}</p>
-                <nav className="footer__nav">
+                <nav>
                     <ul className="footer__links">
                         <li className="footer__link-item">
                             <Link className="footer__link" to="https://practicum.yandex.ru/">Яндекс.Практикум</Link>

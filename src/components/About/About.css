@@ -9,3 +9,9 @@
         padding: 0 50px;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .about {
+        padding: 0 18px;
+    }
+}

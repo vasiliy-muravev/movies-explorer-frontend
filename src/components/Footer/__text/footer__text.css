@@ -6,3 +6,13 @@
     line-height: 1.23;
     margin-top: 20px;
 }
+
+@media screen and (max-width: 767px) {
+    .footer__text {
+        flex-direction: column-reverse;
+        align-items: center;
+        font-size: 12px;
+        line-height: 1.25;
+        margin-top: 30px;
+    }
+}

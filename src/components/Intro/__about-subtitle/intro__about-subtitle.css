@@ -18,3 +18,11 @@
         margin: 22px auto 0 auto;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .intro__about-subtitle {
+        font-size: 13px;
+        line-height: 1.23;
+        margin: 24px auto 0 auto;
+    }
+}

@@ -11,7 +11,16 @@
 
 @media screen and (max-width: 1023px) {
     .technology__item-subtitle {
+        margin: 0 auto 83px auto;
         font-size: 12px;
         line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .technology__item-subtitle {
+        margin: 0 auto 50px auto;
+        font-size: 11px;
+        line-height: 1.45;
     }
 }
