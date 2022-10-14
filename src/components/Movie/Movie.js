@@ -18,7 +18,7 @@ function Movie({movie, isUserMovies}) {
                 <h2 className="movie__title-text">{movie.nameRU}</h2>
                 <p className="movie__title-duration">{`${movie.duration} минут`}</p>
             </div>
-            <img className="movie__title-image" alt={movie.nameRU}
+            <img className="movie__image" alt={movie.nameRU}
                  src={`https://api.nomoreparties.co${movie.image.url}`}/>
             <div className="movie__like-button-item">
                 <button className={`movie__like-button ${btnClass}`}>

@@ -8,3 +8,10 @@
     flex-direction: column;
     width: 100%;
 }
+
+@media screen and (max-width: 767px) {
+    .movie {
+        max-width: 300px;
+        max-height: 271px;
+    }
+}

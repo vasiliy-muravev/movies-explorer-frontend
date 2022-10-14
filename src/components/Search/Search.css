@@ -9,3 +9,9 @@
         padding: 0 30px;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .search {
+        padding: 0 10px 10px 10px;
+    }
+}

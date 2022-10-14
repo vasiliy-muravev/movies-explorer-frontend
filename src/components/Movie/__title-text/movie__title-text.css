@@ -9,3 +9,10 @@
     text-overflow: ellipsis;
     max-width: 240px;
 }
+
+@media screen and (max-width: 767px) {
+    .movie__title-text   {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}

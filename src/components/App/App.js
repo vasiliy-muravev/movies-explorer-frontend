@@ -38,7 +38,7 @@ function App() {
         <div className="app">
             <Switch>
                 <Route exact path="/">
-                    <Header loggedIn={true}/>
+                    <Header loggedIn={true} aboutPage={true}/>
                     <Intro/>
                     <About/>
                     <Technology/>

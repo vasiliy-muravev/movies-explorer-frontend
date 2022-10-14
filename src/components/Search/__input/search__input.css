@@ -8,3 +8,10 @@
     background-color: unset;
     color: #fff;
 }
+
+@media screen and (max-width: 767px) {
+    .search__input {
+        font-size: 11px;
+        line-height: 1.63;
+    }
+}

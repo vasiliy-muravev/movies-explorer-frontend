@@ -2,6 +2,7 @@
 @import url(./vendor/fonts/fonts.css);
 @import url(./components/App/App.css);
 @import url(./components/Header/Header.css);
+@import url(./components/Header/_blue/header_blue.css);
 @import url(./components/Header/__logo/header__logo.css);
 @import url(./components/Header/__logo/_auth-header/header__logo_auth-header.css);
 @import url(./components/Header/__links/header__links.css);
@@ -85,7 +86,7 @@
 @import url(components/Movie/__title/movie__title.css);
 @import url(components/Movie/__title-text/movie__title-text.css);
 @import url(components/Movie/__title-duration/movie__title-duration.css);
-@import url(components/Movie/__title-image/movie__title-image.css);
+@import url(components/Movie/__image/movie__image.css);
 @import url(components/Movie/__like-button-item/movie__like-button-item.css);
 @import url(components/Movie/__like-button/movie__like-button.css);
 @import url(components/Movie/__like-button/_liked/movie__like-button-liked.css);

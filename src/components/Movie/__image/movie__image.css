@@ -1,0 +1,14 @@
+.movie__image {
+    max-width: 360px;
+    max-height: 200px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 767px) {
+    .movie__image {
+        max-width: 300px;
+        max-height: 168px;
+    }
+}

@@ -3,9 +3,9 @@ import Navigation from '../Navigation/Navigation';
 import Auth from '../Auth/Auth';
 import {Link} from "react-router-dom";
 
-function Header({loggedIn}) {
+function Header({loggedIn, aboutPage}) {
     return (
-        <header className="header">
+        <header className={`header ${aboutPage && 'header_blue'}`}>
             <Link to="/" className="header__logo"></Link>
             <Navigation />
             <Auth loggedIn={loggedIn}/>
