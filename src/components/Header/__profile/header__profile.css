@@ -4,6 +4,7 @@
     border-radius: 50px;
     box-sizing: border-box;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .header__profile:hover {

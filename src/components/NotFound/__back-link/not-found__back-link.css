@@ -9,3 +9,11 @@
 .not-found__back-link:hover {
     opacity: .6;
 }
+
+@media screen and (max-width: 767px) {
+    .not-found__back-link {
+        font-size: 12px;
+        line-height: 1.25;
+        margin-bottom: 30px;
+    }
+}
