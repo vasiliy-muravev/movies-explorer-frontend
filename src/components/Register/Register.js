@@ -16,8 +16,8 @@ function Register() {
                 <AuthField title={'Пароль'} placeholder={''} name={'password'} type={'password'}
                            error={'Что-то пошло не так...'} isValid={false}/>
                 <AuthSubmit title={'Зарегистрироваться'}/>
-                <AuthFooter title={'Уже зарегистрированы?'} linkText={'Войти'} link={'/sign-in'}/>
             </form>
+            <AuthFooter title={'Уже зарегистрированы?'} linkText={'Войти'} link={'/sign-in'}/>
         </div>
     )
 }

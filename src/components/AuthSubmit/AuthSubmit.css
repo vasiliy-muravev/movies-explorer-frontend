@@ -11,3 +11,9 @@
     margin: auto auto 16px auto;
     width: 100%;
 }
+
+@media screen and (max-width: 767px) {
+    .auth-submit {
+        margin: 157px auto 16px auto;
+    }
+}

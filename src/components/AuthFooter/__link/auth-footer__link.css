@@ -6,3 +6,10 @@
     text-decoration: none;
     margin-left: 8px;
 }
+
+@media screen and (max-width: 767px) {
+    .auth-footer__link {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+}

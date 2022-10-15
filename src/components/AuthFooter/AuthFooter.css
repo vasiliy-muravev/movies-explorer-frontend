@@ -2,3 +2,9 @@
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width: 767px) {
+    .auth-footer {
+        padding-bottom: 30px;
+    }
+}

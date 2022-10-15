@@ -119,6 +119,7 @@
 @import url(components/AuthField/__form-input/_failed-validation/auth-field__form-input_failed-validation.css);
 @import url(components/AuthField/__form-input-error/auth-field__form-input-error.css);
 @import url(components/AuthSubmit/AuthSubmit.css);
+@import url(components/AuthSubmit/_login/auth-submit_login.css);
 @import url(components/AuthFooter/AuthFooter.css);
 @import url(components/AuthFooter/__title/auth-footer__title.css);
 @import url(components/AuthFooter/__link/auth-footer__link.css);

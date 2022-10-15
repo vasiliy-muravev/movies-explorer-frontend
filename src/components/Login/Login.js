@@ -13,10 +13,10 @@ function Login() {
                 <AuthField title={'E-mail'} placeholder={'pochta@yandex.ru'} name={'email'} type={'email'}
                            isValid={true}/>
                 <AuthField title={'Пароль'} placeholder={''} name={'password'} type={'password'}
-                           error={''} isValid={true}/>
-                <AuthSubmit title={'Войти'}/>
-                <AuthFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/sign-up'}/>
+                           error={'Что-то пошло не так...'} isValid={false}/>
+                <AuthSubmit title={'Войти'} isLogin={true}/>
             </form>
+            <AuthFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/sign-up'}/>
         </div>
     )
 }
