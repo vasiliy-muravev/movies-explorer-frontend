@@ -5,3 +5,15 @@
     line-height: 1.21;
     color: #fff;
 }
+
+@media screen and (max-width: 1023px) {
+    .redact__title {
+        margin: 236px auto 0 auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .redact__title {
+        margin: 70px auto 0 auto;
+    }
+}

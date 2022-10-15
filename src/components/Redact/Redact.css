@@ -5,3 +5,15 @@
     align-items: center;
     flex-direction: column;
 }
+
+@media screen and (max-width: 1023px) {
+    .redact {
+        min-height: 950px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .redact {
+        min-height: 706px;
+    }
+}

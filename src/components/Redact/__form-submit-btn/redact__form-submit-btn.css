@@ -12,3 +12,15 @@
 .redact__form-submit-btn:hover {
     opacity: .6;
 }
+
+@media screen and (max-width: 1023px) {
+    .redact__form-submit-btn {
+        margin: 210px auto 16px auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .redact__form-submit-btn {
+        margin: 379px auto 16px auto;
+    }
+}
