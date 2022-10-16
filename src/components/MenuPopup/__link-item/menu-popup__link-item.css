@@ -1,0 +1,13 @@
+.menu-popup__link-item {
+    list-style-type: none;
+}
+
+.menu-popup__link-item:not(:last-child) {
+    margin-bottom: 28px;
+}
+
+@media screen and (max-width: 767px) {
+    .menu-popup__link-item:not(:last-child) {
+        margin-bottom: 24px;
+    }
+}

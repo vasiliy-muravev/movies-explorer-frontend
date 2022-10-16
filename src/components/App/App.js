@@ -16,11 +16,13 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import {useState} from 'react';
 import React from 'react';
 import {api} from '../utils/Api';
+import MenuPopup from '../MenuPopup/MenuPopup';
 
 function App() {
-    /* Начальное состояние стейт переменных - закрыты */
+    /* Начальное состояние стейт переменных */
     const [movies, setMovieState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isMenuPopupOpen, setMenuPopupState] = useState(false);
 
     /* Передаем массив с карточками в card */
     React.useEffect(() => {
@@ -34,11 +36,18 @@ function App() {
         });
     }, []);
 
+    /* Обработчик открытия попапа меню */
+    const handleBurgerClick = () => setMenuPopupState(true);
+    /* Обработчик закрытия попапа меню */
+    const closeMenuPopup = () => setMenuPopupState(false);
+    /* Обработчик перехода по ссылке при открытом попапе меню */
+    const handleLinkClick = () => closeMenuPopup();
+
     return (
         <div className="app">
             <Switch>
                 <Route exact path="/">
-                    <Header loggedIn={true} aboutPage={true}/>
+                    <Header loggedIn={false} aboutPage={true} onBurgerClick={handleBurgerClick}/>
                     <Intro/>
                     <About/>
                     <Technology/>
@@ -46,13 +55,13 @@ function App() {
                     <Footer/>
                 </Route>
                 <Route path="/movies">
-                    <Header loggedIn={false}/>
+                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
                     <Search/>
                     <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
                     <Footer/>
                 </Route>
                 <Route path="/saved-movies">
-                    <Header/>
+                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
                     <Search/>
                     <UserMovies movies={movies.slice(0, 3)} isUserMovies={true} isLoading={isLoading}/>
                     <Footer/>
@@ -64,7 +73,7 @@ function App() {
                     <Login/>
                 </Route>
                 <Route path="/redact">
-                    <Header/>
+                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
                     <Redact/>
                 </Route>
                 <Route path="/not-found">
@@ -74,6 +83,9 @@ function App() {
                     <Redirect to="/not-found"/>
                 </Route>
             </Switch>
+            <MenuPopup onClose={closeMenuPopup}
+                       isOpen={isMenuPopupOpen}
+                       onLickClick={handleLinkClick}/>
         </div>
     );
 }

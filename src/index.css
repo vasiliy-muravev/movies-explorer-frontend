@@ -10,7 +10,9 @@
 @import url(./components/Header/__link-item/header__link-item.css);
 @import url(./components/Header/__link/header__link.css);
 @import url(./components/Header/__profile/header__profile.css);
+@import url(./components/Header/__profile/_d-none/header__profile_d-none.css);
 @import url(./components/Header/__profile-links/header__profile-links.css);
+@import url(components/Header/__menu-burger/header__menu-burger.css);
 @import url(./components/Header/__profile-logo/header__profile-logo.css);
 @import url(./components/Header/__profile-name/header__profile-name.css);
 @import url(./components/Header/__signup/header__signup.css);
@@ -123,4 +125,13 @@
 @import url(components/AuthFooter/AuthFooter.css);
 @import url(components/AuthFooter/__title/auth-footer__title.css);
 @import url(components/AuthFooter/__link/auth-footer__link.css);
+@import url(components/MenuPopup/MenuPopup.css);
+@import url(components/MenuPopup/_opened/menu-popup_opened.css);
+@import url(components/MenuPopup/__close-button/menu-popup__close-button.css);
+@import url(components/MenuPopup/__container/menu-popup__container.css);
+@import url(components/MenuPopup/__links/menu-popup__links.css);
+@import url(components/MenuPopup/__link-item/menu-popup__link-item.css);
+@import url(components/MenuPopup/__link/menu-popup__link.css);
+@import url(components/MenuPopup/__link/_underline/menu-popup__link_underline.css);
+@import url(components/MenuPopup/__profile/menu-popup__profile.css);
 
