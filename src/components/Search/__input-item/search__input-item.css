@@ -7,3 +7,9 @@
     align-items: center;
     height: 48px;
 }
+
+
+.search__input-item:focus-within {
+    outline: inset;
+}
+

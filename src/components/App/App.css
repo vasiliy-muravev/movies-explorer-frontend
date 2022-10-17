@@ -14,3 +14,8 @@
         max-width: 1023px;
     }
 }
+
+/* Плавная прокрутка внутри элемента */
+#show-more {
+    scroll-behavior: smooth;
+}

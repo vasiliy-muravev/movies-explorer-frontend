@@ -1,4 +1,10 @@
 .student__benefit-title {
     display: flex;
     justify-content: space-between;
+    text-decoration: none;
+    color: #fff;
+}
+
+.student__benefit-title:hover {
+    opacity: .6;
 }

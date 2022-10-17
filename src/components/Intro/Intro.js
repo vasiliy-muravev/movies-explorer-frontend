@@ -2,7 +2,7 @@ import React from 'react';
 
 function Intro() {
     return (
-        <div className="intro">
+        <section className="intro">
             <div className="intro__about">
                 <div className="intro__about-text">
                     <h1 className="intro__about-title">Учебный проект студента факультета Веб&#8209;разработки.</h1>
@@ -13,9 +13,9 @@ function Intro() {
                 <div className="intro__about-logo"></div>
             </div>
             <div className="intro__more">
-                <button className="intro__more-button">Узнать больше</button>
+                <a href="#show-more"><button type="button" className="intro__more-button">Узнать больше</button></a>
             </div>
-        </div>
+        </section>
     )
 }
 

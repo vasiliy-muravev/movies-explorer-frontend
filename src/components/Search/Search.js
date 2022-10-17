@@ -2,11 +2,11 @@ import React from 'react';
 
 function Search() {
     return (
-        <div className="search">
-            <div className="search__items">
+        <section className="search">
+            <form className="search__items">
                 <label className="search__input-item">
-                    <input type="text" className="search__input" placeholder="Фильм"></input>
-                    <button className="search__input-submit">Найти</button>
+                    <input type="text" className="search__input" placeholder="Фильм" required></input>
+                    <button type="button" className="search__input-submit">Найти</button>
                 </label>
                 <div className="search__checkbox-group">
                     <p className="search__checkbox-title">Короткометражки</p>
@@ -15,9 +15,9 @@ function Search() {
                         <span className="search__checkbox-slider"></span>
                     </label>
                 </div>
-            </div>
+            </form>
             <div className="search__line"></div>
-        </div>
+        </section>
     )
 }
 

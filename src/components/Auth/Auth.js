@@ -16,7 +16,7 @@ function Auth({loggedIn, onBurgerClick}) {
     return (
         <div className="header__profile-links">
             {!loggedIn && <Link to="/sign-up" className="header__signup">Регистрация</Link>}
-            {!loggedIn && <button className="header__signin" onClick={handleLoginClick}>Войти</button>}
+            {!loggedIn && <button type="button" className="header__signin" onClick={handleLoginClick}>Войти</button>}
             {loggedIn &&
                 <Link to="/redact" className="header__profile header__profile_d-none">
                     <div className="header__profile-logo"></div>

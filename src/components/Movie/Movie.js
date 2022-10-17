@@ -21,7 +21,7 @@ function Movie({movie, isUserMovies}) {
             <img className="movie__image" alt={movie.nameRU}
                  src={`https://api.nomoreparties.co${movie.image.url}`}/>
             <div className="movie__like-button-item">
-                <button className={`movie__like-button ${btnClass}`}>
+                <button type="button" className={`movie__like-button ${btnClass}`}>
                     {btnText}
                 </button>
             </div>

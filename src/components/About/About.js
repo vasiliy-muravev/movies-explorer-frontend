@@ -2,7 +2,7 @@ import React from 'react';
 
 function About() {
     return (
-        <div className="about">
+        <section className="about" id="show-more">
             <h2 className="about__title">О проекте</h2>
             <div className="about__line"></div>
             <div className="about__items">
@@ -27,7 +27,7 @@ function About() {
                 <div className="about__time-task"><span>Back-end</span></div>
                 <div className="about__time-task"><span>Front-end</span></div>
             </div>
-        </div>
+        </section>
     )
 }
 

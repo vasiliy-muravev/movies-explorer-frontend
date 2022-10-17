@@ -42,28 +42,35 @@ function App() {
     const closeMenuPopup = () => setMenuPopupState(false);
     /* Обработчик перехода по ссылке при открытом попапе меню */
     const handleLinkClick = () => closeMenuPopup();
+    /* Обработчик анимации перехода по якорной ссылке */
 
     return (
         <div className="app">
             <Switch>
                 <Route exact path="/">
                     <Header loggedIn={false} aboutPage={true} onBurgerClick={handleBurgerClick}/>
-                    <Intro/>
-                    <About/>
-                    <Technology/>
-                    <Student/>
+                    <main>
+                        <Intro/>
+                        <About/>
+                        <Technology/>
+                        <Student/>
+                    </main>
                     <Footer/>
                 </Route>
                 <Route path="/movies">
                     <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
-                    <Search/>
-                    <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
+                    <main>
+                        <Search/>
+                        <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
+                    </main>
                     <Footer/>
                 </Route>
                 <Route path="/saved-movies">
                     <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
-                    <Search/>
-                    <UserMovies movies={movies.slice(0, 3)} isUserMovies={true} isLoading={isLoading}/>
+                    <main>
+                        <Search/>
+                        <UserMovies movies={movies.slice(0, 3)} isUserMovies={true} isLoading={isLoading}/>
+                    </main>
                     <Footer/>
                 </Route>
                 <Route path="/sign-up">
