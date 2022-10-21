@@ -1,0 +1,18 @@
+.search__input {
+    margin-left: 22px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28;
+    border: unset;
+    outline: 0;
+    background-color: unset;
+    color: #fff;
+    width: 80%;
+}
+
+@media screen and (max-width: 767px) {
+    .search__input {
+        font-size: 11px;
+        line-height: 1.63;
+    }
+}

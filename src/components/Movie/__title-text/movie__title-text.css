@@ -1,0 +1,18 @@
+.movie__title-text {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 18px auto 18px 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+}
+
+@media screen and (max-width: 767px) {
+    .movie__title-text   {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}

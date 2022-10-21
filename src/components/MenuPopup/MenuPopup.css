@@ -1,0 +1,20 @@
+.menu-popup {
+    position: fixed;
+    z-index: 5;
+    color: #000;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .menu-popup {
+        display: inherit;
+    }
+}

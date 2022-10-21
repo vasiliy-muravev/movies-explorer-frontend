@@ -1,0 +1,19 @@
+.redact {
+    min-height: 700px;
+    background-color: #202020;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 1023px) {
+    .redact {
+        min-height: 1024px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .redact {
+        min-height: 780px;
+    }
+}

@@ -1,0 +1,28 @@
+.intro__about-subtitle {
+    margin: 36px 0 0 0;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.23;
+    color: #fff;
+    opacity: 0.5;
+    max-width: 310px;
+}
+
+@media screen and (max-width: 1023px) {
+    .intro__about-subtitle {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 1.23;
+        text-align: center;
+        mix-blend-mode: normal;
+        margin: 22px auto 0 auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .intro__about-subtitle {
+        font-size: 13px;
+        line-height: 1.23;
+        margin: 24px auto 0 auto;
+    }
+}

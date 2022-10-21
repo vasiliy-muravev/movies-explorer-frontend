@@ -1,0 +1,22 @@
+.intro__about-logo {
+    background-image: url(../../../images/intro-logo.png);
+    width: 310px;
+    height: 304px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 75px 0 145px auto;
+}
+
+@media screen and (max-width: 1023px) {
+    .intro__about-logo {
+        margin: 140px auto 48px auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .intro__about-logo {
+        max-width: 210px;
+        max-height: 206px;
+        margin: 70px auto 44px auto;
+    }
+}

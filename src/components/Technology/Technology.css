@@ -1,0 +1,18 @@
+.technology {
+    min-height: 625px;
+    background-color: #272727;
+    padding: 0 70px;
+}
+
+@media screen and (max-width: 1023px) {
+    .technology {
+        padding: 0 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .technology {
+        padding: 0 18px;
+        background-color: #202020;
+    }
+}

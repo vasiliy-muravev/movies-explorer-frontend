@@ -1,0 +1,18 @@
+.student__info-github {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    margin: auto auto 0 0;
+    text-decoration: none;
+    color: #fff;
+}
+
+.student__info-github:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+    .student__info-github {
+        margin: 40px auto 0 0;
+    }
+}

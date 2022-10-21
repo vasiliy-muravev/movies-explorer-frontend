@@ -1,0 +1,5 @@
+.redact__form-input-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,17 @@
+.search__input-submit {
+    background: #4285F4;
+    border-radius: 48px;
+    width: 59px;
+    height: 34px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.63;
+    color: #fff;
+    border: none;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.search__input-submit:hover {
+    opacity: .6;
+}

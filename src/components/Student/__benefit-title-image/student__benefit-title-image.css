@@ -1,0 +1,24 @@
+.student__benefit-title-image {
+    background-image: url(../../../images/arrow.svg);
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #fff;
+    margin: 16px 8px 6px 8px;
+}
+
+@media screen and (max-width: 1023px) {
+    .student__benefit-title-image {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .student__benefit-title-image {
+        width: 13px;
+        height: 13px;
+        margin: 8px 8px 6px 8px;
+    }
+}

@@ -1,0 +1,19 @@
+.menu-popup__profile {
+    display: flex;
+    border: 2px solid rgba(170, 170, 170, .2);
+    border-radius: 50px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 90px;
+}
+
+.menu-popup__profile:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 767px) {
+    .menu-popup__profile {
+        margin-bottom: 46px;
+    }
+}

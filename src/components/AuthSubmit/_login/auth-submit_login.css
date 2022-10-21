@@ -1,0 +1,5 @@
+@media screen and (max-width: 767px) {
+    .auth-submit_login {
+        margin: 237px auto 16px auto;
+    }
+}

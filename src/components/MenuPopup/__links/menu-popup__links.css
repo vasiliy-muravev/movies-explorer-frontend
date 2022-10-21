@@ -1,0 +1,7 @@
+.menu-popup__links {
+    margin: 159px auto auto auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

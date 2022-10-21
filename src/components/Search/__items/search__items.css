@@ -1,0 +1,19 @@
+.search__items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 80px 0 83px 0;
+}
+
+@media screen and (max-width: 1023px) {
+    .search__items {
+        flex-direction: column;
+        padding: 60px 0 57px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .search__items {
+        padding: 60px 0 44px 0;
+    }
+}

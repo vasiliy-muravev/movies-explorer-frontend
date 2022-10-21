@@ -1,0 +1,6 @@
+.movie__title {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    max-height: 54px;
+}

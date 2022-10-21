@@ -1,0 +1,21 @@
+.movies__items {
+    display: grid;
+    grid-gap: 32px 28px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+}
+
+@media screen and (max-width: 1160px) {
+    .movies__items {
+        grid-gap: 35px 24px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movies__items {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        grid-row-gap: 16px;
+    }
+}

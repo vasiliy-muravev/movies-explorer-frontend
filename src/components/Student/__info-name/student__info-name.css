@@ -1,0 +1,23 @@
+.student__info-name {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin: 0 auto 18px 0;
+}
+
+@media screen and (max-width: 1023px) {
+    .student__info-name {
+        font-size: 40px;
+        line-height: 1;
+        margin: 0 auto 16px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .student__info-name {
+        font-size: 30px;
+        line-height: 1.2;
+        margin: 0 auto 20px 0;
+    }
+}

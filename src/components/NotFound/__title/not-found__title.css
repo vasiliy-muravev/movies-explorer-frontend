@@ -1,0 +1,21 @@
+.not-found__title {
+    margin: 246px auto 5px auto;
+    color: #fff;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 1.21;
+}
+
+@media screen and (max-width: 1023px) {
+    .not-found__title {
+        margin: 408px auto 5px auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .not-found__title {
+        margin: 329px auto 10px auto;
+        font-size: 80px;
+        line-height: 1.21;
+    }
+}

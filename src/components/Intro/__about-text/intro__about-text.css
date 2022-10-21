@@ -1,0 +1,10 @@
+.intro__about-text {
+    max-width: 640px;
+    padding-top: 75px;
+}
+
+@media screen and (max-width: 1023px) {
+    .intro__about-text {
+        padding-top: 0;
+    }
+}

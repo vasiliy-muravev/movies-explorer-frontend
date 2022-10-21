@@ -1,0 +1,16 @@
+.user-movies {
+    background-color: #202020;
+    padding: 70px 70px 230px 70px;
+}
+
+@media screen and (max-width: 1023px) {
+    .user-movies {
+        padding: 70px 30px 170px 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .user-movies {
+        padding: 40px 10px 170px 10px;
+    }
+}

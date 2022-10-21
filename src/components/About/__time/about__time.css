@@ -1,0 +1,23 @@
+.about__time {
+    margin: 110px 0 0 0;
+    padding-bottom: 110px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr 4fr;
+    text-align: center;
+    vertical-align: center;
+}
+
+@media screen and (max-width: 1023px) {
+    .about__time {
+        grid-template-columns: 1fr 3.77fr;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .about__time {
+        margin: 60px 0 0 0;
+        padding-bottom: 93px;
+        grid-template-columns: 1fr 1.84fr;
+    }
+}

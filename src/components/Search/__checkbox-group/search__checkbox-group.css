@@ -1,0 +1,15 @@
+.search__checkbox-group {
+    display: flex;
+}
+
+@media screen and (max-width: 1023px) {
+    .search__checkbox-group {
+        margin-top: 38px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .search__checkbox-group {
+        margin-top: 45px;
+    }
+}

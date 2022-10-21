@@ -1,0 +1,18 @@
+.about__time-frontend {
+    background-color: #303030;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+    .about__time-frontend {
+        font-size: 11px;
+        line-height: 1.18;
+    }
+}

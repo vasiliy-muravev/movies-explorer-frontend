@@ -1,0 +1,15 @@
+@media screen and (max-width: 1023px) {
+    .header__menu-burger {
+        background-image: url(../../../images/burger.svg);
+        color: #fff;
+        width: 44px;
+        height: 44px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        cursor: pointer;
+    }
+}
+
+.header__menu-burger:hover {
+    opacity: .6;
+}

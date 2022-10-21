@@ -1,0 +1,9 @@
+.header__profile-logo {
+    background-image: url(../../../images/profile.svg);
+    width: 12px;
+    height: 14px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: #fff;
+    margin: 9px 7px 9px 12px;
+}
