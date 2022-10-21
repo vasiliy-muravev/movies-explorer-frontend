@@ -17,12 +17,20 @@ import {useState} from 'react';
 import React from 'react';
 import {api} from '../utils/Api';
 import MenuPopup from '../MenuPopup/MenuPopup';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext';
+import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute';
+import MoviesPage from "../../pages/MoviesPage";
+import UserMoviesPage from "../../pages/UserMoviesPage";
+import RedactPage from "../../pages/RedactPage";
 
 function App() {
     /* Начальное состояние стейт переменных */
     const [movies, setMovieState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isMenuPopupOpen, setMenuPopupState] = useState(false);
+
+    /* Контекст текущего пользователя */
+    const [currentUser, setCurrentUser] = useState({});
 
     /* Передаем массив с карточками в card */
     React.useEffect(() => {
@@ -45,55 +53,55 @@ function App() {
     /* Обработчик анимации перехода по якорной ссылке */
 
     return (
-        <div className="app">
-            <Switch>
-                <Route exact path="/">
-                    <Header loggedIn={false} aboutPage={true} onBurgerClick={handleBurgerClick}/>
-                    <main>
-                        <Intro/>
-                        <About/>
-                        <Technology/>
-                        <Student/>
-                    </main>
-                    <Footer/>
-                </Route>
-                <Route path="/movies">
-                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
-                    <main>
-                        <Search/>
-                        <Movies movies={movies.slice(0, 12)} isUserMovies={false} isLoading={isLoading}/>
-                    </main>
-                    <Footer/>
-                </Route>
-                <Route path="/saved-movies">
-                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
-                    <main>
-                        <Search/>
-                        <UserMovies movies={movies.slice(0, 3)} isUserMovies={true} isLoading={isLoading}/>
-                    </main>
-                    <Footer/>
-                </Route>
-                <Route path="/sign-up">
-                    <Register/>
-                </Route>
-                <Route path="/sign-in">
-                    <Login/>
-                </Route>
-                <Route path="/redact">
-                    <Header loggedIn={true} onBurgerClick={handleBurgerClick}/>
-                    <Redact/>
-                </Route>
-                <Route path="/not-found">
-                    <NotFound/>
-                </Route>
-                <Route path="/*">
-                    <Redirect to="/not-found"/>
-                </Route>
-            </Switch>
-            <MenuPopup onClose={closeMenuPopup}
-                       isOpen={isMenuPopupOpen}
-                       onLickClick={handleLinkClick}/>
-        </div>
+        <CurrentUserContext.Provider value={currentUser}>
+            <div className="app">
+                <Switch>
+                    <Route exact path="/">
+                        <Header loggedIn={false} aboutPage={true} onBurgerClick={handleBurgerClick}/>
+                        <main>
+                            <Intro/>
+                            <About/>
+                            <Technology/>
+                            <Student/>
+                        </main>
+                        <Footer/>
+                    </Route>
+                    <ProtectedRoute path="/movies"
+                                    loggedIn={true}
+                                    movies={movies}
+                                    isUserMovies={false}
+                                    component={MoviesPage}
+                                    isLoading={isLoading}
+                                    onBurgerClick={handleBurgerClick}/>
+                    <ProtectedRoute path="/saved-movies"
+                                    loggedIn={true}
+                                    movies={movies}
+                                    isUserMovies={true}
+                                    component={UserMoviesPage}
+                                    isLoading={isLoading}
+                                    onBurgerClick={handleBurgerClick}/>
+                    <Route path="/sign-up">
+                        <Register/>
+                    </Route>
+                    <Route path="/sign-in">
+                        <Login/>
+                    </Route>
+                    <ProtectedRoute path="/redact"
+                                    loggedIn={true}
+                                    component={RedactPage}
+                                    onBurgerClick={handleBurgerClick}/>
+                    <Route path="/not-found">
+                        <NotFound/>
+                    </Route>
+                    <Route path="/*">
+                        <Redirect to="/not-found"/>
+                    </Route>
+                </Switch>
+                <MenuPopup onClose={closeMenuPopup}
+                           isOpen={isMenuPopupOpen}
+                           onLickClick={handleLinkClick}/>
+            </div>
+        </CurrentUserContext.Provider>
     );
 }
 
