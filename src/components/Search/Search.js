@@ -16,11 +16,12 @@ function Search({searchMovies}) {
     }
 
     function handleSubmit(e) {
+        console.log(searchQuery, shortFilms);
         e.preventDefault();
         /* Передаём значения управляемых компонентов во внешний обработчик в App.js */
         searchMovies({
             searchQuery,
-            shortFilms
+            shortFilms: +shortFilms
         });
     }
 

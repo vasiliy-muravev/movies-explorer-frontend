@@ -11,24 +11,28 @@ import NotFound from '../NotFound/NotFound';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {useState} from 'react';
 import React from 'react';
-import {moviesApi} from '../utils/MoviesApi';
+import {moviesApi} from '../../utils/MoviesApi';
 import MenuPopup from '../MenuPopup/MenuPopup';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute';
 import MoviesPage from "../../pages/MoviesPage";
 import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
-import {isFound} from "../utils/Utils";
+import {isFound} from "../../utils/Utils";
+import {moviesLimit} from "../../constants/Constants";
 
 
 function App() {
     /* Начальное состояние стейт переменных */
     const [allMovies, setAllMovieState] = useState([]);
     const [filteredMovies, setFilteredMovieState] = useState([]);
+    const [renderedMovies, setRenderedMoviesState] = useState([]);
     const [savedMovies, setSavedMoviesState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isMenuPopupOpen, setMenuPopupState] = useState(false);
-    const [isNotFound, setNotFoundState] = useState(false);
+    const [isNotFound, setIsNotFoundState] = useState(false);
+    const [isServerError, setIsServerError] = useState(false);
+    const [renderCount, setRenderCount] = useState(12);
 
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
@@ -38,7 +42,19 @@ function App() {
         if (localStorage.getItem('filteredMovies')) {
             setFilteredMovieState(JSON.parse(localStorage.getItem('filteredMovies')));
         }
+        if (localStorage.getItem('renderedMovies')) {
+            setRenderedMoviesState(JSON.parse(localStorage.getItem('renderedMovies')));
+        }
     }, []);
+
+    /* Отслеживание изменения экрана */
+    React.useEffect(() => {
+        function handleResize() {
+            console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+        }
+
+        window.addEventListener('resize', handleResize);
+    });
 
     /* Обработчик открытия попапа меню */
     const handleBurgerClick = () => setMenuPopupState(true);
@@ -48,39 +64,55 @@ function App() {
     const handleLinkClick = () => closeMenuPopup();
     /* Обработчик анимации перехода по якорной ссылке */
 
+    const setRenderedMovies = (filteredMovies) => {
+        localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+        setFilteredMovieState(filteredMovies);
+
+        localStorage.setItem('renderedMovies', JSON.stringify(filteredMovies.slice(0, renderCount)));
+        setRenderedMoviesState(filteredMovies.slice(0, renderCount));
+        /* Отрисовка сообщения "Ничего не найдено" */
+        filteredMovies.length === 0 ? setIsNotFoundState(true) : setIsNotFoundState(false);
+    }
+
     /* Обработчик поиска фильмов */
     const handleSearchMovies = (formData) => {
+        setFilteredMovieState([]);
+        setIsServerError(false);
         if (localStorage.getItem('allMovies')) {
-            /* Отфильтрованные фильмы тоже сохраняем на стороне пользователя */
-            const allMovies = JSON.parse(localStorage.getItem('allMovies'));
-            const filteredMovies = allMovies.filter(function (movie) {
+            /* Если в локальном хранилище есть все фильмы, берем оттуда */
+            const allMoviesStorage = JSON.parse(localStorage.getItem('allMovies'));
+            const filteredMovies = allMoviesStorage.filter(function (movie) {
                 return isFound(movie, formData);
             });
-            localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-            setFilteredMovieState(filteredMovies);
-            /* Отрисовка сообщения "Ничего не найдено" */
-            filteredMovies.length === 0 ? setNotFoundState(true) : setNotFoundState(false);
+            setRenderedMovies(filteredMovies);
         } else {
             setIsLoading(true);
             moviesApi.getAll().then((moviesData) => {
                 /* Запрос всех фильмов с сервиса beatfilm-movies производится только при первом поиске */
                 setAllMovieState(moviesData);
                 localStorage.setItem('allMovies', JSON.stringify(moviesData));
-                /* Отфильтрованные фильмы тоже сохраняем на стороне пользователя */
+                /* Отфильтрованные фильмы сохраняем на стороне пользователя */
                 const filteredMovies = moviesData.filter(function (movie) {
                     return isFound(movie, formData);
                 });
-                localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
-                setFilteredMovieState(filteredMovies);
-                /* Отрисовка сообщения "Ничего не найдено" */
-                filteredMovies.length === 0 ? setNotFoundState(true) : setNotFoundState(false);
+                setRenderedMovies(filteredMovies);
             }).catch((err) => {
                 console.log(err);
+                setIsServerError(true);
             }).finally(() => {
                 setIsLoading(false);
             });
         }
     }
+
+    /* Обработчик кнопки "Еще" */
+    const handleLoadMore = () => {
+        if (filteredMovies.length > renderedMovies.length) {
+            setRenderCount(renderedMovies.length + moviesLimit.desktop.more);
+            setRenderedMoviesState(filteredMovies.slice(0, renderedMovies.length + moviesLimit.desktop.more));
+        }
+    };
+
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -98,13 +130,15 @@ function App() {
                     </Route>
                     <ProtectedRoute path="/movies"
                                     loggedIn={true}
-                                    movies={filteredMovies}
+                                    movies={renderedMovies}
                                     isUserMovies={false}
                                     component={MoviesPage}
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}
                                     searchMovies={handleSearchMovies}
-                                    isNotFound={isNotFound}/>
+                                    isNotFound={isNotFound}
+                                    isServerError={isServerError}
+                                    loadMore={handleLoadMore}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={true}
                                     movies={savedMovies}
