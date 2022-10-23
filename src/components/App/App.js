@@ -32,16 +32,12 @@ function App() {
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
 
-    /* Передаем массив с карточками в card */
-    // React.useEffect(() => {
-    //     setIsLoading(true);
-    //     moviesApi.getAll().then((moviesData) => {
-    //         setAllMovieState(moviesData);
-    //         setIsLoading(false);
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }, []);
+    /* Ранее отфильтрованные карточки */
+    React.useEffect(() => {
+        if (localStorage.getItem('filteredMovies')) {
+            setFilteredMovieState(JSON.parse(localStorage.getItem('filteredMovies')));
+        }
+    }, []);
 
     /* Обработчик открытия попапа меню */
     const handleBurgerClick = () => setMenuPopupState(true);
@@ -55,11 +51,13 @@ function App() {
     const handleSearchMovies = (formData) => {
         setIsLoading(true);
         moviesApi.getAll().then((moviesData) => {
-            // setAllMovieState(moviesData);
+            setAllMovieState(moviesData);
             console.log(formData.searchQuery);
             const filteredMovies = moviesData.filter(function (movie) {
                 return isFound(movie, formData);
             });
+            console.log(filteredMovies);
+            localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
             setFilteredMovieState(filteredMovies);
         }).catch((err) => {
             console.log(err);
