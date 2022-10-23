@@ -7,25 +7,25 @@ import Student from '../Student/Student';
 import Footer from '../Footer/Footer';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
-import Redact from '../Redact/Redact';
-import Search from '../Search/Search';
-import Movies from '../Movies/Movies';
-import UserMovies from '../UserMovies/UserMovies';
 import NotFound from '../NotFound/NotFound';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {useState} from 'react';
 import React from 'react';
-import {api} from '../utils/Api';
+import {moviesApi} from '../utils/MoviesApi';
 import MenuPopup from '../MenuPopup/MenuPopup';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext';
 import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute';
 import MoviesPage from "../../pages/MoviesPage";
 import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
+import {isFound} from "../utils/Utils";
+
 
 function App() {
     /* Начальное состояние стейт переменных */
-    const [movies, setMovieState] = useState([]);
+    const [allMovies, setAllMovieState] = useState([]);
+    const [filteredMovies, setFilteredMovieState] = useState([]);
+    const [savedMovies, setSavedMoviesState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isMenuPopupOpen, setMenuPopupState] = useState(false);
 
@@ -33,16 +33,15 @@ function App() {
     const [currentUser, setCurrentUser] = useState({});
 
     /* Передаем массив с карточками в card */
-    React.useEffect(() => {
-        setIsLoading(true);
-        api.getInitialCards().then((moviesData) => {
-            setMovieState(moviesData);
-            setIsLoading(false);
-        }).catch((err) => {
-
-            console.log(err);
-        });
-    }, []);
+    // React.useEffect(() => {
+    //     setIsLoading(true);
+    //     moviesApi.getAll().then((moviesData) => {
+    //         setAllMovieState(moviesData);
+    //         setIsLoading(false);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }, []);
 
     /* Обработчик открытия попапа меню */
     const handleBurgerClick = () => setMenuPopupState(true);
@@ -51,6 +50,23 @@ function App() {
     /* Обработчик перехода по ссылке при открытом попапе меню */
     const handleLinkClick = () => closeMenuPopup();
     /* Обработчик анимации перехода по якорной ссылке */
+
+    /* Обработчик поиска фильмов */
+    const handleSearchMovies = (formData) => {
+        setIsLoading(true);
+        moviesApi.getAll().then((moviesData) => {
+            // setAllMovieState(moviesData);
+            console.log(formData.searchQuery);
+            const filteredMovies = moviesData.filter(function (movie) {
+                return isFound(movie, formData);
+            });
+            setFilteredMovieState(filteredMovies);
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
+            setIsLoading(false);
+        });
+    }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -68,14 +84,15 @@ function App() {
                     </Route>
                     <ProtectedRoute path="/movies"
                                     loggedIn={true}
-                                    movies={movies}
+                                    movies={filteredMovies}
                                     isUserMovies={false}
                                     component={MoviesPage}
                                     isLoading={isLoading}
-                                    onBurgerClick={handleBurgerClick}/>
+                                    onBurgerClick={handleBurgerClick}
+                                    searchMovies={handleSearchMovies}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={true}
-                                    movies={movies}
+                                    movies={savedMovies}
                                     isUserMovies={true}
                                     component={UserMoviesPage}
                                     isLoading={isLoading}

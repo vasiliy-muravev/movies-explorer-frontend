@@ -3,7 +3,7 @@ import Movie from '../Movie/Movie';
 import Preloader from "../Preloader/Preloader";
 
 function Movies({movies, isUserMovies, isLoading}) {
-    console.log(movies);
+
     return (
         <section className="movies">
             {isLoading && <Preloader/>}
