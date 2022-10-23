@@ -18,7 +18,7 @@ import {ProtectedRoute} from '../ProtectedRoute/ProtectedRoute';
 import MoviesPage from "../../pages/MoviesPage";
 import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
-import {isFound} from "../../utils/Utils";
+import {getDevice, isFound} from "../../utils/Utils";
 import {moviesLimit} from "../../constants/Constants";
 
 
@@ -32,12 +32,44 @@ function App() {
     const [isMenuPopupOpen, setMenuPopupState] = useState(false);
     const [isNotFound, setIsNotFoundState] = useState(false);
     const [isServerError, setIsServerError] = useState(false);
-    const [renderCount, setRenderCount] = useState(12);
+    const [renderCount, setRenderCount] = useState(0);
 
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
 
-    /* Ранее отфильтрованные карточки */
+    /* Отслеживание изменения экрана для определения устройства */
+    const [device, setDevice] = React.useState({});
+
+    /* Защита от слишком частой перерисовки страницы */
+    const debounce = (fn, ms) => {
+        let timer;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null;
+                fn.apply(this, arguments);
+            }, ms)
+        };
+    }
+
+    React.useEffect(() => {
+        const debouncedHandleResize = debounce(function handleResize() {
+            setDevice(getDevice(window.innerWidth));
+        }, 1000)
+        window.addEventListener('resize', debouncedHandleResize);
+
+        return () => {
+            window.removeEventListener('resize', debouncedHandleResize)
+        }
+    });
+
+    /* При начальной загрузке определяем устройство и задаем количество фильмов */
+    React.useEffect(() => {
+        setDevice(getDevice(window.innerWidth));
+        setRenderCount(getDevice(window.innerWidth).count);
+    }, []);
+
+    /* Отрисовываем ранее отфильтрованные и показанные карточки */
     React.useEffect(() => {
         if (localStorage.getItem('filteredMovies')) {
             setFilteredMovieState(JSON.parse(localStorage.getItem('filteredMovies')));
@@ -46,15 +78,6 @@ function App() {
             setRenderedMoviesState(JSON.parse(localStorage.getItem('renderedMovies')));
         }
     }, []);
-
-    /* Отслеживание изменения экрана */
-    React.useEffect(() => {
-        function handleResize() {
-            console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
-        }
-
-        window.addEventListener('resize', handleResize);
-    });
 
     /* Обработчик открытия попапа меню */
     const handleBurgerClick = () => setMenuPopupState(true);
@@ -108,8 +131,8 @@ function App() {
     /* Обработчик кнопки "Еще" */
     const handleLoadMore = () => {
         if (filteredMovies.length > renderedMovies.length) {
-            setRenderCount(renderedMovies.length + moviesLimit.desktop.more);
-            setRenderedMoviesState(filteredMovies.slice(0, renderedMovies.length + moviesLimit.desktop.more));
+            setRenderCount(renderedMovies.length + device.more);
+            setRenderedMoviesState(filteredMovies.slice(0, renderedMovies.length + device.more));
         }
     };
 
@@ -131,6 +154,7 @@ function App() {
                     <ProtectedRoute path="/movies"
                                     loggedIn={true}
                                     movies={renderedMovies}
+                                    filteredMovies={filteredMovies}
                                     isUserMovies={false}
                                     component={MoviesPage}
                                     isLoading={isLoading}

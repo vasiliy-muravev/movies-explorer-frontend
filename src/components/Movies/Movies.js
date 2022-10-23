@@ -3,7 +3,7 @@ import Movie from '../Movie/Movie';
 import Preloader from "../Preloader/Preloader";
 import {NO_RESULT_TEXT, SERVER_ERROR_TEXT} from "../../constants/Constants";
 
-function Movies({movies, isUserMovies, isLoading, isNotFound, isServerError, loadMore}) {
+function Movies({movies, isUserMovies, isLoading, isNotFound, isServerError, loadMore, filteredMovies}) {
     return (
         <section className="movies">
             {isLoading && <Preloader/>}
@@ -13,10 +13,10 @@ function Movies({movies, isUserMovies, isLoading, isNotFound, isServerError, loa
                 {movies.map(item => <Movie key={item.id} movie={item} isUserMovies={isUserMovies}/>)}
             </div>
             {
-                !isLoading &&
+                !isLoading && movies.length < filteredMovies.length ?
                 <div className="movies__show-more-item">
                     <button type="button" className="movies__show-more" onClick={loadMore}>Ещё</button>
-                </div>
+                </div> : ''
             }
         </section>
     )

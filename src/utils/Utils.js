@@ -1,7 +1,8 @@
 import React from "react";
+import {moviesLimit} from "../constants/Constants";
 
 const isNameFound = (movie, name, formData) => {
-    return  movie[name].toLowerCase().includes(formData.searchQuery.toLowerCase());
+    return movie[name].toLowerCase().includes(formData.searchQuery.toLowerCase());
 }
 
 const isFoundShortMovie = (movie, formData) => {
@@ -23,4 +24,17 @@ export const isFound = (movie, formData) => {
     } else {
         return isFoundMovie(movie, formData);
     }
+}
+
+export const getDevice = (width) => {
+    let device;
+    if (width >= 1024) {
+        device = moviesLimit.desktop;
+    } else if (width < 1024 && width >= 768) {
+        device = moviesLimit.tablet;
+    } else {
+        device = moviesLimit.mobile;
+    }
+
+    return device;
 }
