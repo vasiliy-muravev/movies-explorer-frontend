@@ -28,6 +28,7 @@ function App() {
     const [savedMovies, setSavedMoviesState] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isMenuPopupOpen, setMenuPopupState] = useState(false);
+    const [isNotFound, setNotFoundState] = useState(false);
 
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
@@ -49,21 +50,36 @@ function App() {
 
     /* Обработчик поиска фильмов */
     const handleSearchMovies = (formData) => {
-        setIsLoading(true);
-        moviesApi.getAll().then((moviesData) => {
-            setAllMovieState(moviesData);
-            console.log(formData.searchQuery);
-            const filteredMovies = moviesData.filter(function (movie) {
+        if (localStorage.getItem('allMovies')) {
+            /* Отфильтрованные фильмы тоже сохраняем на стороне пользователя */
+            const allMovies = JSON.parse(localStorage.getItem('allMovies'));
+            const filteredMovies = allMovies.filter(function (movie) {
                 return isFound(movie, formData);
             });
-            console.log(filteredMovies);
             localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
             setFilteredMovieState(filteredMovies);
-        }).catch((err) => {
-            console.log(err);
-        }).finally(() => {
-            setIsLoading(false);
-        });
+            /* Отрисовка сообщения "Ничего не найдено" */
+            filteredMovies.length === 0 ? setNotFoundState(true) : setNotFoundState(false);
+        } else {
+            setIsLoading(true);
+            moviesApi.getAll().then((moviesData) => {
+                /* Запрос всех фильмов с сервиса beatfilm-movies производится только при первом поиске */
+                setAllMovieState(moviesData);
+                localStorage.setItem('allMovies', JSON.stringify(moviesData));
+                /* Отфильтрованные фильмы тоже сохраняем на стороне пользователя */
+                const filteredMovies = moviesData.filter(function (movie) {
+                    return isFound(movie, formData);
+                });
+                localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+                setFilteredMovieState(filteredMovies);
+                /* Отрисовка сообщения "Ничего не найдено" */
+                filteredMovies.length === 0 ? setNotFoundState(true) : setNotFoundState(false);
+            }).catch((err) => {
+                console.log(err);
+            }).finally(() => {
+                setIsLoading(false);
+            });
+        }
     }
 
     return (
@@ -87,7 +103,8 @@ function App() {
                                     component={MoviesPage}
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}
-                                    searchMovies={handleSearchMovies}/>
+                                    searchMovies={handleSearchMovies}
+                                    isNotFound={isNotFound}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={true}
                                     movies={savedMovies}

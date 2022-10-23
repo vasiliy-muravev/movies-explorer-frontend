@@ -84,6 +84,7 @@
 @import url(components/Movies/__items/movies__items.css);
 @import url(components/Movies/__show-more-item/movies__show-more-item.css);
 @import url(components/Movies/__show-more/movies__show-more.css);
+@import url(components/Movies/__no-items/movies__no-items.css);
 @import url(components/Movie/Movie.css);
 @import url(components/Movie/__title/movie__title.css);
 @import url(components/Movie/__title-text/movie__title-text.css);
