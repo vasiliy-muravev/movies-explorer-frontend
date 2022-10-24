@@ -15,8 +15,10 @@ function MoviesPage({
                         isNotFound,
                         isServerError,
                         loadMore,
-                        like
+                        like,
+                        savedMovies
                     }) {
+
     return (
         <>
             <Header loggedIn={loggedIn} onBurgerClick={onBurgerClick}/>
@@ -24,7 +26,7 @@ function MoviesPage({
                 <Search searchMovies={searchMovies}/>
                 <Movies movies={movies} filteredMovies={filteredMovies} isUserMovies={isUserMovies}
                         isLoading={isLoading} isNotFound={isNotFound}
-                        isServerError={isServerError} loadMore={loadMore} like={like}/>
+                        isServerError={isServerError} loadMore={loadMore} like={like} savedMovies={savedMovies}/>
             </main>
             <Footer/>
         </>

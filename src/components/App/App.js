@@ -19,8 +19,9 @@ import MoviesPage from "../../pages/MoviesPage";
 import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
 import {getDevice, isFound} from "../../utils/Utils";
-import {moviesLimit} from "../../constants/Constants";
+import {IMAGE_URL, moviesLimit} from "../../constants/Constants";
 import {mainApi} from "../../utils/MainApi";
+import {deleteCookie, getCookie, setCookie} from "../../utils/cookie";
 
 
 function App() {
@@ -43,6 +44,23 @@ function App() {
 
     /* Отслеживание изменения экрана для определения устройства */
     const [device, setDevice] = React.useState({});
+
+    /* Проверяем авторизацию и получаем данные пользователя */
+    React.useEffect(() => {
+        const jwt = getCookie('jwt');
+
+        if (jwt) {
+            mainApi.getUserInfo(jwt).then((res) => {
+                if (res) {
+                    setCurrentUser(res[0]);
+                    setSavedMoviesState(res[1]);
+                    setLoggedIn(true);
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }, []);
 
     /* Защита от слишком частой перерисовки страницы */
     const debounce = (fn, ms) => {
@@ -141,8 +159,53 @@ function App() {
     };
 
     /* Обработчик кнопки "Лайка" */
-    const handleLike = () => {
-
+    const handleLike = (movie, isSavedMoviesPage) => {
+        /* Для страницы /saved-movies сразу удаляем фильм */
+        if (isSavedMoviesPage) {
+            mainApi.deleteMovie(movie._id)
+                .then((movie) => {
+                    setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
+                    setRenderedMoviesState(JSON.parse(localStorage.getItem('renderedMovies')));
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            /* Для страницы /movies проверяем, есть ли уже лайк на этой карточке */
+            const isLiked = savedMovies.some(m => +m.movieId === movie.id);
+            if (isLiked) {
+                const movieDB = savedMovies.filter(m => +m.movieId === movie.id);
+                mainApi.deleteMovie(movieDB[0]._id)
+                    .then((movie) => {
+                        setSavedMoviesState(savedMovies => savedMovies.filter((m) => m._id !== movie._id));
+                        setRenderedMoviesState(JSON.parse(localStorage.getItem('renderedMovies')));
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else {
+                mainApi.addMovie({
+                    country: movie.country,
+                    director: movie.director,
+                    duration: movie.duration,
+                    year: movie.year,
+                    description: movie.description,
+                    image: IMAGE_URL + movie.image.url,
+                    trailerLink: movie.trailerLink,
+                    thumbnail: IMAGE_URL + movie.image.formats.thumbnail.url,
+                    movieId: movie.id,
+                    nameRU: movie.nameRU,
+                    nameEN: movie.nameEN
+                })
+                    .then((movie) => {
+                        savedMovies.push(movie);
+                        setRenderedMoviesState(JSON.parse(localStorage.getItem('renderedMovies')));
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        }
     };
 
     /* Обработчик авторизации */
@@ -150,7 +213,8 @@ function App() {
         return mainApi.authorize(email, password)
             .then((res) => {
                 if (res.token) {
-                    localStorage.setItem('jwt', res.token);
+                    deleteCookie('jwt');
+                    setCookie('jwt', res.token);
                     setEmail(email);
                     setLoggedIn(true);
                     history.push('/saved-movies');
@@ -158,7 +222,7 @@ function App() {
             }).catch((err) => {
                 console.log(err);
             });
-    }
+    };
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -186,14 +250,16 @@ function App() {
                                     isNotFound={isNotFound}
                                     isServerError={isServerError}
                                     loadMore={handleLoadMore}
-                                    like={handleLike}/>
+                                    like={handleLike}
+                                    savedMovies={savedMovies}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={true}
                                     movies={savedMovies}
                                     isUserMovies={true}
                                     component={UserMoviesPage}
                                     isLoading={isLoading}
-                                    onBurgerClick={handleBurgerClick}/>
+                                    onBurgerClick={handleBurgerClick}
+                                    like={handleLike}/>
                     <Route path="/signup">
                         <Register/>
                     </Route>

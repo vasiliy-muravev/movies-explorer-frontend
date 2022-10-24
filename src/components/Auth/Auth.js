@@ -1,8 +1,12 @@
 import {Link, useHistory} from 'react-router-dom';
 import React from 'react';
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-function Auth({loggedIn, onBurgerClick}) {
+function Auth({loggedIn, onBurgerClick, email}) {
     const history = useHistory();
+
+    /* Подписываемся на контекст UserContext */
+    const user = React.useContext(CurrentUserContext);
 
     const handleLoginClick = () => {
         history.push('/signin');
@@ -20,7 +24,7 @@ function Auth({loggedIn, onBurgerClick}) {
             {loggedIn &&
                 <Link to="/redact" className="header__profile header__profile_d-none">
                     <div className="header__profile-logo"></div>
-                    <span className="header__profile-name">Аккаунт</span>
+                    <span className="header__profile-name">{user ? user.email : 'Аккаунт'}</span>
                 </Link>
             }
             {loggedIn &&

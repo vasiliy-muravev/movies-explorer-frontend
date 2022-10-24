@@ -9,17 +9,17 @@ class MainApi {
         this._baseUrl = baseUrl;
     }
 
-    getUserInfo() {
-        return Promise.all([this.getUserData(), this.getUserMovies()]);
+    getUserInfo(token) {
+        return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
     }
 
-    getUserData() {
-        this.url = this._baseUrl + 'users/me';
-        return fetch(this.url, {
-            headers: this.headers,
-            credentials: 'include',
-        }).then(res => this._getResponseData(res))
-    }
+    // getUserData() {
+    //     this.url = this._baseUrl + 'users/me';
+    //     return fetch(this.url, {
+    //         headers: this.headers,
+    //         credentials: 'include',
+    //     }).then(res => this._getResponseData(res))
+    // }
 
     getUserMovies() {
         this.url = this._baseUrl + 'movies';
@@ -30,7 +30,7 @@ class MainApi {
     }
 
     register(email, password) {
-        this.url = this._baseUrl + '/signup';
+        this.url = this._baseUrl + 'signup';
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
@@ -39,7 +39,7 @@ class MainApi {
     }
 
     authorize(email, password) {
-        this.url = this._baseUrl + '/signin';
+        this.url = this._baseUrl + 'signin';
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
@@ -49,7 +49,7 @@ class MainApi {
     }
 
     checkAuthorize(token) {
-        this.url = this._baseUrl + '/users/me';
+        this.url = this._baseUrl + 'users/me';
         return fetch(this.url, {
             method: 'GET',
             credentials: 'include',
@@ -70,6 +70,15 @@ class MainApi {
         }).then(res => this._getResponseData(res));
     }
 
+    deleteMovie(movieId) {
+        this.url = this._baseUrl + 'movies/' + movieId;
+        return fetch(this.url, {
+            method: 'DELETE',
+            headers: this.headers,
+            credentials: 'include',
+        }).then(res => this._getResponseData(res));
+    }
+
     _getResponseData(res) {
         if (!res.ok) {
             return Promise.reject(`Ошибка: ${res.status}`);
@@ -78,4 +87,4 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru', getCookie('jwt'));
+export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/', getCookie('jwt'));
