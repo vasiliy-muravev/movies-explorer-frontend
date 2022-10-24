@@ -4,7 +4,7 @@ function Search({searchMovies}) {
     const [searchQuery, setSearchQuery] = useState(localStorage.getItem('searchQuery') ?? '');
     const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? 0);
 
-    /* Обработчики изменения инпутов обновляет стейт */
+    /* Обработчики изменения инпутов обновляют стейт */
     function handleChangeSearchQuery(e) {
         setSearchQuery(e.target.value);
         localStorage.setItem('searchQuery', e.target.value);
@@ -16,7 +16,6 @@ function Search({searchMovies}) {
     }
 
     function handleSubmit(e) {
-        console.log(searchQuery, shortFilms);
         e.preventDefault();
         /* Передаём значения управляемых компонентов во внешний обработчик в App.js */
         searchMovies({

@@ -1,9 +1,32 @@
+import {getCookie} from "./cookie";
+
 class MainApi {
-    constructor(baseUrl) {
+    constructor(baseUrl, token) {
         this.headers = {
-            'Content-Type': 'application/json'
-        };
+            'Content-Type': 'application/json',
+            'Authorization': token,
+        }
         this._baseUrl = baseUrl;
+    }
+
+    getUserInfo() {
+        return Promise.all([this.getUserData(), this.getUserMovies()]);
+    }
+
+    getUserData() {
+        this.url = this._baseUrl + 'users/me';
+        return fetch(this.url, {
+            headers: this.headers,
+            credentials: 'include',
+        }).then(res => this._getResponseData(res))
+    }
+
+    getUserMovies() {
+        this.url = this._baseUrl + 'movies';
+        return fetch(this.url, {
+            headers: this.headers,
+            credentials: 'include',
+        }).then(res => this._getResponseData(res))
     }
 
     register(email, password) {
@@ -20,6 +43,7 @@ class MainApi {
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
+            credentials: 'include',
             body: JSON.stringify({email, password})
         }).then(res => this._getResponseData(res));
     }
@@ -28,10 +52,21 @@ class MainApi {
         this.url = this._baseUrl + '/users/me';
         return fetch(this.url, {
             method: 'GET',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
+        }).then(res => this._getResponseData(res));
+    }
+
+    addMovie(movie) {
+        this.url = this._baseUrl + 'movies';
+        return fetch(this.url, {
+            method: 'POST',
+            headers: this.headers,
+            credentials: 'include',
+            body: JSON.stringify(movie)
         }).then(res => this._getResponseData(res));
     }
 
@@ -43,4 +78,4 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru');
+export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru', getCookie('jwt'));

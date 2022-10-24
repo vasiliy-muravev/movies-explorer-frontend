@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import React from 'react';
 import {moviesApi} from '../../utils/MoviesApi';
@@ -20,6 +20,7 @@ import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
 import {getDevice, isFound} from "../../utils/Utils";
 import {moviesLimit} from "../../constants/Constants";
+import {mainApi} from "../../utils/MainApi";
 
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
 
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [email, setEmail] = useState('');
+    const history = useHistory();
 
     /* Отслеживание изменения экрана для определения устройства */
     const [device, setDevice] = React.useState({});
@@ -136,6 +140,25 @@ function App() {
         }
     };
 
+    /* Обработчик кнопки "Лайка" */
+    const handleLike = () => {
+
+    };
+
+    /* Обработчик авторизации */
+    const onLogin = ({email, password}) => {
+        return mainApi.authorize(email, password)
+            .then((res) => {
+                if (res.token) {
+                    localStorage.setItem('jwt', res.token);
+                    setEmail(email);
+                    setLoggedIn(true);
+                    history.push('/saved-movies');
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+    }
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -162,7 +185,8 @@ function App() {
                                     searchMovies={handleSearchMovies}
                                     isNotFound={isNotFound}
                                     isServerError={isServerError}
-                                    loadMore={handleLoadMore}/>
+                                    loadMore={handleLoadMore}
+                                    like={handleLike}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={true}
                                     movies={savedMovies}
@@ -170,11 +194,11 @@ function App() {
                                     component={UserMoviesPage}
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}/>
-                    <Route path="/sign-up">
+                    <Route path="/signup">
                         <Register/>
                     </Route>
-                    <Route path="/sign-in">
-                        <Login/>
+                    <Route path="/signin">
+                        <Login onLogin={onLogin}/>
                     </Route>
                     <ProtectedRoute path="/redact"
                                     loggedIn={true}

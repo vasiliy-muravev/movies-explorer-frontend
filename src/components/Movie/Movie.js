@@ -1,6 +1,7 @@
 import React from 'react';
+import {IMAGE_URL} from "../../constants/Constants";
 
-function Movie({movie, isUserMovies}) {
+function Movie({movie, isUserMovies, like}) {
     let btnClass;
     let btnText;
 
@@ -15,13 +16,15 @@ function Movie({movie, isUserMovies}) {
     return (
         <article className="movie" id={movie.id}>
             <div className="movie__title">
-                <h2 className="movie__title-text">{movie.nameRU}</h2>
+                <a target="_blank" href={`${movie.trailerLink}`} className="movie__title-text">{movie.nameRU}</a>
                 <p className="movie__title-duration">{`${movie.duration} минут`}</p>
             </div>
-            <img className="movie__image" alt={movie.nameRU}
-                 src={`https://api.nomoreparties.co${movie.image.url}`}/>
+            <a target="_blank" href={`${movie.trailerLink}`}>
+                <img className="movie__image" alt={movie.nameRU}
+                     src={`${IMAGE_URL}${movie.image.url}`}/>
+            </a>
             <div className="movie__like-button-item">
-                <button type="button" className={`movie__like-button ${btnClass}`}>
+                <button type="button" onClick={like} className={`movie__like-button ${btnClass}`}>
                     {btnText}
                 </button>
             </div>

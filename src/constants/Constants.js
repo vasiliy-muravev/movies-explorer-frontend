@@ -7,4 +7,5 @@ export const moviesLimit = {
     tablet: {count: 8, more: 2},
     mobile: {count: 5, more: 2},
 };
+export const IMAGE_URL = 'https://api.nomoreparties.co';
 

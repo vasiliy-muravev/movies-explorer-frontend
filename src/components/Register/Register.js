@@ -17,7 +17,7 @@ function Register() {
                            error={'Что-то пошло не так...'} isValid={false}/>
                 <AuthSubmit title={'Зарегистрироваться'}/>
             </form>
-            <AuthFooter title={'Уже зарегистрированы?'} linkText={'Войти'} link={'/sign-in'}/>
+            <AuthFooter title={'Уже зарегистрированы?'} linkText={'Войти'} link={'/signin'}/>
         </div>
     )
 }
