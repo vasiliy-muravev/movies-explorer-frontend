@@ -6,28 +6,6 @@ import AuthFooter from '../AuthFooter/AuthFooter';
 import {useForm} from "react-hook-form";
 
 function Register({onRegister, errorMessage}) {
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    //
-    // /* Обработчики изменения инпутов обновляют стейт */
-    // function handleChangeName(e) {
-    //     setName(e.target.value);
-    // }
-    //
-    // function handleChangeEmail(e) {
-    //     setEmail(e.target.value);
-    // }
-    //
-    // function handleChangePassword(e) {
-    //     setPassword(e.target.value);
-    // }
-    //
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     onRegister({name, email, password});
-    // }
-
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
         mode: "onChange"
     });
@@ -92,7 +70,6 @@ function Register({onRegister, errorMessage}) {
                         Зарегистрироваться
                     </button>
                 </div>
-
             </form>
             <AuthFooter title={'Уже зарегистрированы?'} linkText={'Войти'} link={'/signin'}/>
         </div>
