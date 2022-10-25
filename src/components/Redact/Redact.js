@@ -26,8 +26,7 @@ function Redact({loggedIn, onSignOut, onUpdateUser}) {
                   noValidate>
                 <div className="redact__form-input-item">
                     <label className="redact__form-input-title">Имя</label>
-                    <input
-                           type="text"
+                    <input type="text"
                            placeholder="Имя"
                            {...register("name", {
                                required: 'Поле обязательно к заполнению', minLength: {
@@ -43,13 +42,14 @@ function Redact({loggedIn, onSignOut, onUpdateUser}) {
                 <div className="redact__form-line"></div>
                 <div className="redact__form-input-item">
                     <label className="redact__form-input-title">E-mail</label>
-                    <input  type="email"
-                           placeholder="email" {...register("email", {
-                        required: 'Поле обязательно к заполнению', pattern: {
-                            value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/,
-                            message: 'Неправильный формат email'
-                        }
-                    })}
+                    <input type="email"
+                           placeholder="email"
+                           {...register("email", {
+                               required: 'Поле обязательно к заполнению', pattern: {
+                                   value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/,
+                                   message: 'Неправильный формат email'
+                               }
+                           })}
                            defaultValue={user.email || ''}
                            className="redact__form-input"
                            minLength="2" maxLength="30" id="redact-email-input"/>

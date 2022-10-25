@@ -220,8 +220,8 @@ function App() {
         return mainApi.register(name, email, password)
             .then((res) => {
                 if (res) {
-                    // setLoggedIn(true);
                     onLogin({email, password});
+                    setErrorMessage('');
                     history.push('/movies');
                 }
             }).catch((err) => {
@@ -241,10 +241,14 @@ function App() {
                     setCookie('jwt', res.token);
                     setLoggedIn(true);
                     setCurrentUser(res.user);
+                    setErrorMessage('');
                     history.push('/saved-movies');
                 }
             }).catch((err) => {
                 console.log(err);
+                if (err === 'Ошибка: 400') {
+                    setErrorMessage('Логин или пароль введен неверно');
+                }
             });
     };
 
@@ -312,7 +316,7 @@ function App() {
                         <Register onRegister={onRegister} errorMessage={errorMessage}/>
                     </Route>
                     <Route path="/signin">
-                        <Login onLogin={onLogin}/>
+                        <Login onLogin={onLogin} errorMessage={errorMessage}/>
                     </Route>
                     <ProtectedRoute path="/redact"
                                     loggedIn={loggedIn}
