@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-function Redact() {
+function Redact({loggedIn, onSignOut}) {
     /* Стейт, в котором содержится значение инпута, управляемые поля ввода */
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -13,6 +13,13 @@ function Redact() {
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
+    }
+
+    const handleClick = (e) => {
+        if (loggedIn) {
+            e.preventDefault();
+            onSignOut()
+        }
     }
 
     return (
@@ -40,7 +47,7 @@ function Redact() {
                     Редактировать
                 </button>
             </form>
-            <Link to="/logout" className="redact__logout">Выйти из аккаунта</Link>
+            <Link to="/logout" className="redact__logout" onClick={handleClick}>Выйти из аккаунта</Link>
         </div>
     )
 }

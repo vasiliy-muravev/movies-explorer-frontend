@@ -39,7 +39,8 @@ function App() {
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
     const [loggedIn, setLoggedIn] = useState(false);
-    const [email, setEmail] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
     const history = useHistory();
 
     /* Отслеживание изменения экрана для определения устройства */
@@ -61,6 +62,12 @@ function App() {
             });
         }
     }, []);
+    /* Если пользователь авторизован, перенаправляем его на созраненные фильмы */
+    React.useEffect(() => {
+        if (loggedIn) {
+            history.push('/saved-movies');
+        }
+    }, [loggedIn, history])
 
     /* Защита от слишком частой перерисовки страницы */
     const debounce = (fn, ms) => {
@@ -208,6 +215,23 @@ function App() {
         }
     };
 
+    /* Обработчик регистрации */
+    const onRegister = ({name, email, password}) => {
+        return mainApi.register(name, email, password)
+            .then((res) => {
+                if (res) {
+                    // setLoggedIn(true);
+                    onLogin({email, password});
+                    history.push('/movies');
+                }
+            }).catch((err) => {
+                console.log(err);
+                if (err === 'Ошибка: 409') {
+                    setErrorMessage('Пользователь с таким email уже существует');
+                }
+            });
+    }
+
     /* Обработчик авторизации */
     const onLogin = ({email, password}) => {
         return mainApi.authorize(email, password)
@@ -215,8 +239,8 @@ function App() {
                 if (res.token) {
                     deleteCookie('jwt');
                     setCookie('jwt', res.token);
-                    setEmail(email);
                     setLoggedIn(true);
+                    setCurrentUser(res.user);
                     history.push('/saved-movies');
                 }
             }).catch((err) => {
@@ -224,12 +248,22 @@ function App() {
             });
     };
 
+    /* Обработчик удаления авторизации */
+    const onSignOut = () => {
+        const jwt = getCookie('jwt');
+        if (jwt) {
+            deleteCookie('jwt');
+            setLoggedIn(false);
+        }
+    }
+
+    console.log(loggedIn);
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="app">
                 <Switch>
                     <Route exact path="/">
-                        <Header loggedIn={false} aboutPage={true} onBurgerClick={handleBurgerClick}/>
+                        <Header loggedIn={loggedIn} aboutPage={true} onBurgerClick={handleBurgerClick}/>
                         <main>
                             <Intro/>
                             <About/>
@@ -239,7 +273,7 @@ function App() {
                         <Footer/>
                     </Route>
                     <ProtectedRoute path="/movies"
-                                    loggedIn={true}
+                                    loggedIn={loggedIn}
                                     movies={renderedMovies}
                                     filteredMovies={filteredMovies}
                                     isUserMovies={false}
@@ -253,7 +287,7 @@ function App() {
                                     like={handleLike}
                                     savedMovies={savedMovies}/>
                     <ProtectedRoute path="/saved-movies"
-                                    loggedIn={true}
+                                    loggedIn={loggedIn}
                                     movies={savedMovies}
                                     isUserMovies={true}
                                     component={UserMoviesPage}
@@ -261,15 +295,16 @@ function App() {
                                     onBurgerClick={handleBurgerClick}
                                     like={handleLike}/>
                     <Route path="/signup">
-                        <Register/>
+                        <Register onRegister={onRegister} errorMessage={errorMessage}/>
                     </Route>
                     <Route path="/signin">
                         <Login onLogin={onLogin}/>
                     </Route>
                     <ProtectedRoute path="/redact"
-                                    loggedIn={true}
+                                    loggedIn={loggedIn}
                                     component={RedactPage}
-                                    onBurgerClick={handleBurgerClick}/>
+                                    onBurgerClick={handleBurgerClick}
+                                    onSignOut={onSignOut}/>
                     <Route path="/not-found">
                         <NotFound/>
                     </Route>

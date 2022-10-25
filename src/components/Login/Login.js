@@ -12,6 +12,7 @@ function Login({onLogin}) {
     function handleChangeEmail(e) {
         setEmail(e.target.value);
     }
+
     function handleChangePassword(e) {
         setPassword(e.target.value);
     }
@@ -21,9 +22,6 @@ function Login({onLogin}) {
         onLogin({email, password});
     }
 
-    console.log('email ' + email);
-    console.log('password ' + password);
-
     return (
         <div className="login">
             <AuthHeader title={'Рады видеть!'}/>
@@ -32,10 +30,11 @@ function Login({onLogin}) {
                 <AuthField title={'E-mail'} placeholder={'pochta@yandex.ru'} name={'email'} type={'email'}
                            isValid={true} handleChangeEmail={handleChangeEmail}/>
                 <AuthField title={'Пароль'} placeholder={''} name={'password'} type={'password'}
-                           error={'Что-то пошло не так...'} isValid={false} handleChangePassword={handleChangePassword}/>
+                           handleChangePassword={handleChangePassword} error={'Что-то пошло не так...'}
+                           isValid={false}/>
                 <AuthSubmit title={'Войти'} isLogin={true} handleSubmit={handleSubmit}/>
             </form>
-            <AuthFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/sign-up'}/>
+            <AuthFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/signup'}/>
         </div>
     )
 }

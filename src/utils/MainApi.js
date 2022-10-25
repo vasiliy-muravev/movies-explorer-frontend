@@ -29,12 +29,12 @@ class MainApi {
         }).then(res => this._getResponseData(res))
     }
 
-    register(email, password) {
+    register(name, email, password) {
         this.url = this._baseUrl + 'signup';
         return fetch(this.url, {
             method: 'POST',
             headers: this.headers,
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({name, email, password})
         }).then(res => this._getResponseData(res));
     }
 

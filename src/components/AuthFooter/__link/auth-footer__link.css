@@ -13,3 +13,7 @@
         line-height: 1.25;
     }
 }
+
+.auth-footer__link:hover {
+    opacity: .6;
+}

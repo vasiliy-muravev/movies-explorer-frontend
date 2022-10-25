@@ -2,11 +2,11 @@ import React from 'react';
 import Header from "../components/Header/Header";
 import Redact from "../components/Redact/Redact";
 
-function RedactPage({loggedIn, onBurgerClick}) {
+function RedactPage({loggedIn, onBurgerClick, onSignOut}) {
     return (
         <>
             <Header loggedIn={loggedIn} onBurgerClick={onBurgerClick}/>
-            <Redact/>
+            <Redact loggedIn={loggedIn} onSignOut={onSignOut}/>
         </>
     )
 }
