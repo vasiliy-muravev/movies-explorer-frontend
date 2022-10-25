@@ -32,7 +32,7 @@ function Login({onLogin}) {
                 <AuthField title={'Пароль'} placeholder={''} name={'password'} type={'password'}
                            handleChangePassword={handleChangePassword} error={'Что-то пошло не так...'}
                            isValid={false}/>
-                <AuthSubmit title={'Войти'} isLogin={true} handleSubmit={handleSubmit}/>
+                <AuthSubmit title={'Войти'} isLogin={true}/>
             </form>
             <AuthFooter title={'Ещё не зарегистрированы?'} linkText={'Регистрация'} link={'/signup'}/>
         </div>

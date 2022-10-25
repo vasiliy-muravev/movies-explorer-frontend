@@ -1,7 +1,6 @@
 import React from 'react';
 
 function AuthSubmit({title, isLogin, errorMessage}) {
-    console.log(errorMessage);
     return (
         <div className="auth-submit__item">
             <span className="auth-field__form-input-error">{errorMessage}</span>
