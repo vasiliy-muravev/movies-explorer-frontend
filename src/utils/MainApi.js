@@ -13,14 +13,6 @@ class MainApi {
         return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
     }
 
-    // getUserData() {
-    //     this.url = this._baseUrl + 'users/me';
-    //     return fetch(this.url, {
-    //         headers: this.headers,
-    //         credentials: 'include',
-    //     }).then(res => this._getResponseData(res))
-    // }
-
     getUserMovies() {
         this.url = this._baseUrl + 'movies';
         return fetch(this.url, {
@@ -57,6 +49,19 @@ class MainApi {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
+        }).then(res => this._getResponseData(res));
+    }
+
+    setUserData(data) {
+        this.url = this._baseUrl + 'users/me';
+        return fetch(this.url, {
+            method: 'PATCH',
+            headers: this.headers,
+            credentials: 'include',
+            body: JSON.stringify({
+                name: data.name,
+                email: data.email
+            })
         }).then(res => this._getResponseData(res));
     }
 

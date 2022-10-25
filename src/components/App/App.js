@@ -257,7 +257,21 @@ function App() {
         }
     }
 
-    console.log(loggedIn);
+    /* Изменение данных пользователя */
+    const handleUpdateUser = (formData) => {
+        setIsLoading(true);
+        mainApi.setUserData(formData)
+            .then((userData) => {
+                setCurrentUser(userData);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="app">
@@ -304,7 +318,8 @@ function App() {
                                     loggedIn={loggedIn}
                                     component={RedactPage}
                                     onBurgerClick={handleBurgerClick}
-                                    onSignOut={onSignOut}/>
+                                    onSignOut={onSignOut}
+                                    onUpdateUser={handleUpdateUser}/>
                     <Route path="/not-found">
                         <NotFound/>
                     </Route>

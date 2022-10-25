@@ -27,10 +27,6 @@ function Register({onRegister, errorMessage}) {
         onRegister({name, email, password});
     }
 
-    console.log('name ' + name);
-    console.log('email ' + email);
-    console.log('password ' + password);
-
     return (
         <div className="register">
             <AuthHeader title={'Добро пожаловать!'}/>
