@@ -1,5 +1,3 @@
-import React from "react";
-
 export const SERVER_ERROR_TEXT = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const NO_RESULT_TEXT = 'Ничего не найдено';
 export const moviesLimit = {

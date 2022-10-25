@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AuthHeader from '../AuthHeader/AuthHeader';
-import AuthField from '../AuthField/AuthField';
-import AuthSubmit from '../AuthSubmit/AuthSubmit';
 import AuthFooter from '../AuthFooter/AuthFooter';
 import {useForm} from "react-hook-form";
 

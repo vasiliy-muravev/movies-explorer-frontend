@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {IMAGE_URL} from "../../constants/Constants";
 import {useLocation} from "react-router-dom";
 
@@ -15,17 +15,18 @@ function Movie({movie, isUserMovies, like, saved}) {
         btnText = saved ? '' : 'Сохранить';
     }
 
-    function handleLikeClick () {
+    function handleLikeClick() {
         like(movie, pathname === '/saved-movies');
     }
 
     return (
         <article className="movie" id={movie.id}>
             <div className="movie__title">
-                <a target="_blank" href={`${movie.trailerLink}`} className="movie__title-text">{movie.nameRU}</a>
+                <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}
+                   className="movie__title-text">{movie.nameRU}</a>
                 <p className="movie__title-duration">{`${movie.duration} минут`}</p>
             </div>
-            <a target="_blank" href={`${movie.trailerLink}`}>
+            <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}>
                 <img className="movie__image" alt={movie.nameRU}
                      src={movie.image.url ? `${IMAGE_URL}${movie.image.url}` : movie.image}/>
             </a>

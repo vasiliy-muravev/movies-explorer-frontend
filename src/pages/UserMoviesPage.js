@@ -4,12 +4,12 @@ import Search from "../components/Search/Search";
 import Footer from "../components/Footer/Footer";
 import UserMovies from "../components/UserMovies/UserMovies";
 
-function MoviesPage({loggedIn, movies, isUserMovies, onBurgerClick, isLoading, like}) {
+function MoviesPage({loggedIn, movies, isUserMovies, onBurgerClick, isLoading, searchMovies, like}) {
     return (
         <>
             <Header loggedIn={loggedIn} onBurgerClick={onBurgerClick}/>
             <main>
-                <Search/>
+                <Search searchMovies={searchMovies}/>
                 <UserMovies movies={movies} isUserMovies={isUserMovies} isLoading={isLoading} like={like}/>
             </main>
             <Footer/>

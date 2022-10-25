@@ -19,14 +19,13 @@ import MoviesPage from "../../pages/MoviesPage";
 import UserMoviesPage from "../../pages/UserMoviesPage";
 import RedactPage from "../../pages/RedactPage";
 import {getDevice, isFound} from "../../utils/Utils";
-import {IMAGE_URL, moviesLimit} from "../../constants/Constants";
+import {IMAGE_URL} from "../../constants/Constants";
 import {mainApi} from "../../utils/MainApi";
 import {deleteCookie, getCookie, setCookie} from "../../utils/cookie";
 
 
 function App() {
     /* Начальное состояние стейт переменных */
-    const [allMovies, setAllMovieState] = useState([]);
     const [filteredMovies, setFilteredMovieState] = useState([]);
     const [renderedMovies, setRenderedMoviesState] = useState([]);
     const [savedMovies, setSavedMoviesState] = useState([]);
@@ -141,7 +140,6 @@ function App() {
             setIsLoading(true);
             moviesApi.getAll().then((moviesData) => {
                 /* Запрос всех фильмов с сервиса beatfilm-movies производится только при первом поиске */
-                setAllMovieState(moviesData);
                 localStorage.setItem('allMovies', JSON.stringify(moviesData));
                 /* Отфильтрованные фильмы сохраняем на стороне пользователя */
                 const filteredMovies = moviesData.filter(function (movie) {
@@ -311,6 +309,7 @@ function App() {
                                     component={UserMoviesPage}
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}
+                                    searchMovies={handleSearchMovies}
                                     like={handleLike}/>
                     <Route path="/signup">
                         <Register onRegister={onRegister} errorMessage={errorMessage}/>
