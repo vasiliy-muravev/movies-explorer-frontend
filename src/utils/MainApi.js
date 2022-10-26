@@ -1,10 +1,10 @@
-import {getCookie} from "./cookie";
+import Cookies from 'js-cookie';
 
 class MainApi {
     constructor(baseUrl, token) {
         this.headers = {
             'Content-Type': 'application/json',
-            'Authorization': token,
+            'Authorization': `Bearer ${token}`,
         }
         this._baseUrl = baseUrl;
     }
@@ -40,15 +40,12 @@ class MainApi {
         }).then(res => this._getResponseData(res));
     }
 
-    checkAuthorize(token) {
+    checkAuthorize() {
         this.url = this._baseUrl + 'users/me';
         return fetch(this.url, {
             method: 'GET',
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
+            headers: this.headers,
         }).then(res => this._getResponseData(res));
     }
 
@@ -92,4 +89,4 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/', getCookie('jwt'));
+export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/', Cookies.get('jwt'));

@@ -104,6 +104,8 @@
 @import url(components/Redact/Redact.css);
 @import url(components/Redact/__title/redact__title.css);
 @import url(components/Redact/__form/redact__form.css);
+@import url(components/Redact/__form-submit-item/redact__form-submit-item.css);
+@import url(components/Redact/__form-input-message/redact__form-input-message.css);
 @import url(components/Redact/__form-submit-btn/redact__form-submit-btn.css);
 @import url(components/Redact/__logout/redact__logout.css);
 @import url(components/Redact/__form-input/redact__form-input.css);

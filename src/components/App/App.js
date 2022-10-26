@@ -21,8 +21,7 @@ import RedactPage from "../../pages/RedactPage";
 import {getDevice, isFound} from "../../utils/Utils";
 import {IMAGE_URL} from "../../constants/Constants";
 import {mainApi} from "../../utils/MainApi";
-import {deleteCookie, getCookie, setCookie} from "../../utils/cookie";
-
+import Cookies from 'js-cookie';
 
 function App() {
     /* Начальное состояние стейт переменных */
@@ -47,26 +46,21 @@ function App() {
 
     /* Проверяем авторизацию и получаем данные пользователя */
     React.useEffect(() => {
-        const jwt = getCookie('jwt');
-
-        if (jwt) {
-            mainApi.getUserInfo(jwt).then((res) => {
+        if (Cookies.get('jwt') && Cookies.get('jwt').length === 172) {
+            mainApi.getUserInfo().then((res) => {
                 if (res) {
                     setCurrentUser(res[0]);
                     setSavedMoviesState(res[1]);
                     setLoggedIn(true);
+                    /* Для ProtectedRoute компонентов передаем состояние из хранилища */
+                    localStorage.setItem('loggedIn', true);
                 }
             }).catch((err) => {
+                localStorage.setItem('loggedIn', false);
                 console.log(err);
             });
         }
     }, []);
-    /* Если пользователь авторизован, перенаправляем его на созраненные фильмы */
-    React.useEffect(() => {
-        if (loggedIn) {
-            history.push('/saved-movies');
-        }
-    }, [loggedIn, history])
 
     /* Защита от слишком частой перерисовки страницы */
     const debounce = (fn, ms) => {
@@ -137,22 +131,42 @@ function App() {
             });
             setRenderedMovies(filteredMovies);
         } else {
-            setIsLoading(true);
-            moviesApi.getAll().then((moviesData) => {
-                /* Запрос всех фильмов с сервиса beatfilm-movies производится только при первом поиске */
-                localStorage.setItem('allMovies', JSON.stringify(moviesData));
-                /* Отфильтрованные фильмы сохраняем на стороне пользователя */
-                const filteredMovies = moviesData.filter(function (movie) {
-                    return isFound(movie, formData);
+            if (loggedIn) {
+                setIsLoading(true);
+                moviesApi.getAll().then((moviesData) => {
+                    /* Запрос всех фильмов с сервиса beatfilm-movies производится только при первом поиске */
+                    localStorage.setItem('allMovies', JSON.stringify(moviesData));
+                    /* Отфильтрованные фильмы сохраняем на стороне пользователя */
+                    const filteredMovies = moviesData.filter(function (movie) {
+                        return isFound(movie, formData);
+                    });
+                    setRenderedMovies(filteredMovies);
+                }).catch((err) => {
+                    console.log(err);
+                    setIsServerError(true);
+                }).finally(() => {
+                    setIsLoading(false);
                 });
-                setRenderedMovies(filteredMovies);
-            }).catch((err) => {
-                console.log(err);
-                setIsServerError(true);
-            }).finally(() => {
-                setIsLoading(false);
-            });
+            }
         }
+    }
+
+    /* Обработчик поиска фильмов пользователя */
+    const handleSearchUserMovies = (formData) => {
+        setIsLoading(true);
+        setIsServerError(false);
+        mainApi.getUserMovies().then((moviesData) => {
+            /* Отфильтрованные фильмы сохраняем на стороне пользователя */
+            const filteredMovies = moviesData.filter(function (movie) {
+                return isFound(movie, formData);
+            });
+            setSavedMoviesState(filteredMovies);
+        }).catch((err) => {
+            console.log(err);
+            setIsServerError(true);
+        }).finally(() => {
+            setIsLoading(false);
+        });
     }
 
     /* Обработчик кнопки "Еще" */
@@ -235,27 +249,45 @@ function App() {
         return mainApi.authorize(email, password)
             .then((res) => {
                 if (res.token) {
-                    deleteCookie('jwt');
-                    setCookie('jwt', res.token);
+                    Cookies.set('jwt', res.token)
                     setLoggedIn(true);
+                    localStorage.setItem('loggedIn', true);
                     setCurrentUser(res.user);
                     setErrorMessage('');
-                    history.push('/saved-movies');
+                    history.push('/movies');
                 }
             }).catch((err) => {
                 console.log(err);
                 if (err === 'Ошибка: 400') {
-                    setErrorMessage('Логин или пароль введен неверно');
+                    setErrorMessage('Почта или пароль введен неверно');
+                }
+                if (err === 'Ошибка: 401') {
+                    setErrorMessage('Неверная почта или пароль');
                 }
             });
     };
 
+    const clearStorage = () => {
+        localStorage.removeItem('allMovies');
+        localStorage.removeItem('filteredMovies');
+        localStorage.removeItem('renderedMovies');
+        localStorage.removeItem('searchQuery');
+        localStorage.removeItem('shortFilms');
+    }
+
     /* Обработчик удаления авторизации */
     const onSignOut = () => {
-        const jwt = getCookie('jwt');
+        const jwt = Cookies.get('jwt');
         if (jwt) {
-            deleteCookie('jwt');
+            Cookies.remove('jwt');
             setLoggedIn(false);
+            localStorage.setItem('loggedIn', false);
+            setCurrentUser({});
+            setFilteredMovieState([]);
+            setRenderedMoviesState([]);
+            setSavedMoviesState([]);
+            clearStorage();
+            history.push('/');
         }
     }
 
@@ -265,9 +297,11 @@ function App() {
         mainApi.setUserData(formData)
             .then((userData) => {
                 setCurrentUser(userData);
+                setErrorMessage('Данные сохранены');
             })
             .catch((err) => {
                 console.log(err);
+                setErrorMessage('Ошибка сохранения данных');
             })
             .finally(() => {
                 setIsLoading(false);
@@ -289,9 +323,10 @@ function App() {
                         <Footer/>
                     </Route>
                     <ProtectedRoute path="/movies"
-                                    loggedIn={loggedIn}
+                                    loggedIn={localStorage.getItem('loggedIn') === 'true'}
                                     movies={renderedMovies}
                                     filteredMovies={filteredMovies}
+                                    savedMovies={savedMovies}
                                     isUserMovies={false}
                                     component={MoviesPage}
                                     isLoading={isLoading}
@@ -300,16 +335,15 @@ function App() {
                                     isNotFound={isNotFound}
                                     isServerError={isServerError}
                                     loadMore={handleLoadMore}
-                                    like={handleLike}
-                                    savedMovies={savedMovies}/>
+                                    like={handleLike}/>
                     <ProtectedRoute path="/saved-movies"
-                                    loggedIn={loggedIn}
+                                    loggedIn={localStorage.getItem('loggedIn') === 'true'}
                                     movies={savedMovies}
                                     isUserMovies={true}
                                     component={UserMoviesPage}
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}
-                                    searchMovies={handleSearchMovies}
+                                    searchMovies={handleSearchUserMovies}
                                     like={handleLike}/>
                     <Route path="/signup">
                         <Register onRegister={onRegister} errorMessage={errorMessage}/>
@@ -318,11 +352,12 @@ function App() {
                         <Login onLogin={onLogin} errorMessage={errorMessage}/>
                     </Route>
                     <ProtectedRoute path="/redact"
-                                    loggedIn={loggedIn}
+                                    loggedIn={localStorage.getItem('loggedIn') === 'true'}
                                     component={RedactPage}
                                     onBurgerClick={handleBurgerClick}
                                     onSignOut={onSignOut}
-                                    onUpdateUser={handleUpdateUser}/>
+                                    onUpdateUser={handleUpdateUser}
+                                    errorMessage={errorMessage}/>
                     <Route path="/not-found">
                         <NotFound/>
                     </Route>
