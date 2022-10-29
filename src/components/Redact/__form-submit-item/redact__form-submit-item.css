@@ -1,0 +1,17 @@
+.redact__form-submit-item {
+    display: flex;
+    flex-direction: column;
+    margin: 220px auto 16px auto;
+}
+
+@media screen and (max-width: 1023px) {
+    .redact__form-submit-item {
+        margin: 210px auto 16px auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .redact__form-submit-item {
+        margin: 379px auto 16px auto;
+    }
+}

@@ -8,12 +8,11 @@
     line-height: 1.21;
     color: #FFFFFF;
     height: 45px;
-    margin: auto auto 16px auto;
+    margin-top: 10px;
     width: 100%;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
-    .auth-submit {
-        margin: 157px auto 16px auto;
-    }
+.auth-submit:hover {
+    opacity: .6;
 }

@@ -1,46 +1,86 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {useForm} from "react-hook-form";
 
-function Redact() {
-    /* Стейт, в котором содержится значение инпута, управляемые поля ввода */
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-
-    /* Обработчик изменения инпута обновляет стейт */
-    function handleChangeName(e) {
-        setName(e.target.value);
+function Redact({loggedIn, onSignOut, onUpdateUser, errorMessage}) {
+    const [message, setMessage] = useState('');
+    /* Подписываемся на контекст UserContext */
+    const user = React.useContext(CurrentUserContext);
+    const handleClick = (e) => {
+        if (loggedIn) {
+            e.preventDefault();
+            onSignOut()
+        }
     }
+    const {register, handleSubmit, formState: {errors, isDirty, isValid}} = useForm({
+        mode: "onChange"
+    });
+    const onSubmit = (data) => {
+        /* Отправляем форму только если данные были изменены */
+        if (data.email !== user.email || data.name !== user.name) {
+            onUpdateUser(data).then(() => {
+                setMessage('Данные сохранены');
+            })
+                .catch((err) => {
+                    console.log(err);
+                    setMessage('Ошибка сохранения данных');
+                });
 
-    function handleChangeEmail(e) {
-        setEmail(e.target.value);
+            /* Чистим сообщение об ошибке через 3 сек */
+            setTimeout(() => setMessage(''), 3000);
+        }
     }
 
     return (
         <div className="redact">
-            <h1 className="redact__title">Привет, Василий!</h1>
-            <form className="redact__form" method="post" name="redactUserForm"
+            <h1 className="redact__title">Привет, {user.name}!</h1>
+            <form className="redact__form" method="post" name="redactUserForm" onSubmit={handleSubmit(onSubmit)}
                   noValidate>
                 <div className="redact__form-input-item">
                     <label className="redact__form-input-title">Имя</label>
-                    <input value={name || 'Василий'} onChange={handleChangeName} name="name" type="text"
+                    <input type="text"
                            placeholder="Имя"
+                           {...register("name", {
+                               required: 'Поле обязательно к заполнению',
+                               minLength: {
+                                   value: 2,
+                                   message: 'Минимум 2 символа'
+                               },
+                           })}
+                           defaultValue={user.name}
                            className="redact__form-input"
-                           minLength="2" maxLength="30" id="redact-name-input" required/>
+                           minLength="2" maxLength="30" id="redact-name-input"/>
                 </div>
+                {errors?.name && <span className="auth-field__form-input-error">{errors?.name?.message}</span>}
                 <div className="redact__form-line"></div>
                 <div className="redact__form-input-item">
                     <label className="redact__form-input-title">E-mail</label>
-                    <input value={email || 'pochta@yandex.ru'} onChange={handleChangeEmail} name="email" type="email"
+                    <input type="email"
                            placeholder="email"
+                           {...register("email", {
+                               required: 'Поле обязательно к заполнению',
+                               pattern: {
+                                   value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/,
+                                   message: 'Неправильный формат email'
+                               },
+                           })}
+                           defaultValue={user.email}
                            className="redact__form-input"
-                           minLength="2" maxLength="30" id="redact-email-input" required/>
+                           minLength="2" maxLength="30" id="redact-email-input"/>
                 </div>
+                {errors?.email && <span className="auth-field__form-input-error">{errors?.email?.message}</span>}
                 <span className="redact__form-input-error"></span>
-                <button type="submit" className="redact__form-submit-btn">
-                    Редактировать
-                </button>
+
+                <div className="redact__form-submit-item">
+                    <span className="redact__form-input-message">{message}</span>
+                    <button type="submit" className="redact__form-submit-btn" disabled={!isValid || !isDirty}>
+                        Редактировать
+                    </button>
+                </div>
+
             </form>
-            <Link to="/logout" className="redact__logout">Выйти из аккаунта</Link>
+            <Link to="/logout" className="redact__logout" onClick={handleClick}>Выйти из аккаунта</Link>
         </div>
     )
 }

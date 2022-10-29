@@ -4,4 +4,6 @@
     line-height: 1.2;
     color: #EE3465;
     margin-top: 10px;
+    display: block;
+    min-height: 12px;
 }
