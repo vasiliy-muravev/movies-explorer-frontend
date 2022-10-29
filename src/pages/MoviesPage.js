@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "../components/Header/Header";
 import Search from "../components/Search/Search";
 import Movies from "../components/Movies/Movies";
 import Footer from "../components/Footer/Footer";
+import {useLocation} from "react-router-dom";
 
 function MoviesPage({
                         loggedIn,
@@ -17,7 +18,14 @@ function MoviesPage({
                         isServerError,
                         loadMore,
                         like,
+                        restoreUserMovies
                     }) {
+
+    const location = useLocation();
+
+    useEffect(() => {
+        restoreUserMovies();
+    }, [location]);
 
     return (
         <>

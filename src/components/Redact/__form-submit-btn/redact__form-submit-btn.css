@@ -12,3 +12,8 @@
 .redact__form-submit-btn:hover {
     opacity: .6;
 }
+
+.redact__form-submit-btn:disabled {
+    opacity: .6;
+    cursor: initial;
+}

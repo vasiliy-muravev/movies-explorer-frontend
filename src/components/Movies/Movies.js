@@ -21,8 +21,6 @@ function Movies({
             {!isLoading && isNotFound ? <p className="movies__no-items">{NO_RESULT_TEXT}</p> : ''}
             {!isLoading && isServerError ? <p className="movies__no-items">{SERVER_ERROR_TEXT}</p> : ''}
             <div className="movies__items">
-                {/*{movies.map(item => <Movie key={item.id} movie={item} isUserMovies={isUserMovies} like={like}*/}
-                {/*                           />)}*/}
                 {movies.map(item => <Movie key={item.id} movie={item} isUserMovies={isUserMovies} like={like}
                                            saved={savedMovies.some((m) => item.id === +m.movieId)}/>)}
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {IMAGE_URL} from "../../constants/Constants";
 import {useLocation} from "react-router-dom";
+import {getTimeFromMinutes} from "../../utils/Utils";
 
 function Movie({movie, isUserMovies, like, saved}) {
     let btnClass;
@@ -15,6 +16,7 @@ function Movie({movie, isUserMovies, like, saved}) {
         btnText = saved ? '' : 'Сохранить';
     }
 
+
     function handleLikeClick() {
         like(movie, pathname === '/saved-movies');
     }
@@ -24,7 +26,7 @@ function Movie({movie, isUserMovies, like, saved}) {
             <div className="movie__title">
                 <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}
                    className="movie__title-text">{movie.nameRU}</a>
-                <p className="movie__title-duration">{`${movie.duration} минут`}</p>
+                <p className="movie__title-duration">{getTimeFromMinutes(movie.duration)}</p>
             </div>
             <a target="_blank" rel="noreferrer" href={`${movie.trailerLink}`}>
                 <img className="movie__image" alt={movie.nameRU}

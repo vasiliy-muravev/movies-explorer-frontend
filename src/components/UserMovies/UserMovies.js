@@ -3,6 +3,7 @@ import Movie from "../Movie/Movie";
 import Preloader from "../Preloader/Preloader";
 
 function UserMovies({movies, isUserMovies, isLoading, like}) {
+
     return (
         <section className="user-movies">
             {isLoading ? <Preloader/> : ''}

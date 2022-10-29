@@ -57,6 +57,10 @@ function App() {
                 }
             }).catch((err) => {
                 localStorage.setItem('loggedIn', false);
+                clearStorage();
+                setCurrentUser({});
+                setSavedMoviesState([]);
+                Cookies.delete('jwt');
                 console.log(err);
             });
         }
@@ -169,6 +173,20 @@ function App() {
         });
     }
 
+    /* При входе на страницу «Сохранённые фильмы» выводить на экран все сохранённые фильмы */
+    const restoreUserMovies = () => {
+        setIsLoading(true);
+        setIsServerError(false);
+        mainApi.getUserMovies().then((moviesData) => {
+            setSavedMoviesState(moviesData);
+        }).catch((err) => {
+            console.log(err);
+            setIsServerError(true);
+        }).finally(() => {
+            setIsLoading(false);
+        });
+    }
+
     /* Обработчик кнопки "Еще" */
     const handleLoadMore = () => {
         if (filteredMovies.length > renderedMovies.length) {
@@ -236,11 +254,6 @@ function App() {
                     setErrorMessage('');
                     history.push('/movies');
                 }
-            }).catch((err) => {
-                console.log(err);
-                if (err === 'Ошибка: 409') {
-                    setErrorMessage('Пользователь с таким email уже существует');
-                }
             });
     }
 
@@ -254,15 +267,11 @@ function App() {
                     localStorage.setItem('loggedIn', true);
                     setCurrentUser(res.user);
                     setErrorMessage('');
+                    /* Получаем состояние сохраненных фильмов пользователя */
+                    mainApi.getUserMovies().then((moviesData) => {
+                        setSavedMoviesState(moviesData)
+                    });
                     history.push('/movies');
-                }
-            }).catch((err) => {
-                console.log(err);
-                if (err === 'Ошибка: 400') {
-                    setErrorMessage('Почта или пароль введен неверно');
-                }
-                if (err === 'Ошибка: 401') {
-                    setErrorMessage('Неверная почта или пароль');
                 }
             });
     };
@@ -293,18 +302,9 @@ function App() {
 
     /* Изменение данных пользователя */
     const handleUpdateUser = (formData) => {
-        setIsLoading(true);
-        mainApi.setUserData(formData)
+        return mainApi.setUserData(formData)
             .then((userData) => {
                 setCurrentUser(userData);
-                setErrorMessage('Данные сохранены');
-            })
-            .catch((err) => {
-                console.log(err);
-                setErrorMessage('Ошибка сохранения данных');
-            })
-            .finally(() => {
-                setIsLoading(false);
             });
     };
 
@@ -335,7 +335,8 @@ function App() {
                                     isNotFound={isNotFound}
                                     isServerError={isServerError}
                                     loadMore={handleLoadMore}
-                                    like={handleLike}/>
+                                    like={handleLike}
+                                    restoreUserMovies={restoreUserMovies}/>
                     <ProtectedRoute path="/saved-movies"
                                     loggedIn={localStorage.getItem('loggedIn') === 'true'}
                                     movies={savedMovies}
@@ -344,7 +345,8 @@ function App() {
                                     isLoading={isLoading}
                                     onBurgerClick={handleBurgerClick}
                                     searchMovies={handleSearchUserMovies}
-                                    like={handleLike}/>
+                                    like={handleLike}
+                                    restoreUserMovies={restoreUserMovies}/>
                     <Route path="/signup">
                         <Register onRegister={onRegister} errorMessage={errorMessage}/>
                     </Route>

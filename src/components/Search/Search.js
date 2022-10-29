@@ -15,8 +15,7 @@ function Search({searchMovies}) {
         localStorage.setItem('shortFilms', +e.target.checked);
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function handleSearch() {
         /* Передаём значения управляемых компонентов во внешний обработчик в App.js */
         searchMovies({
             searchQuery,
@@ -24,15 +23,21 @@ function Search({searchMovies}) {
         });
     }
 
+    /* Отправка формы при нажатии enter */
+    function onSubmit(e) {
+        e.preventDefault();
+        handleSearch();
+    }
+
     return (
         <section className="search">
-            <form className="search__items">
+            <form className="search__items" onSubmit={onSubmit}>
                 <label className="search__input-item">
                     <input value={searchQuery || ''} onChange={handleChangeSearchQuery} type="text"
                            className="search__input"
                            placeholder="Фильм"
                            required></input>
-                    <button onClick={handleSubmit} type="button" className="search__input-submit">Найти</button>
+                    <button onClick={handleSearch} type="button" className="search__input-submit">Найти</button>
                 </label>
                 <div className="search__checkbox-group">
                     <p className="search__checkbox-title">Короткометражки</p>

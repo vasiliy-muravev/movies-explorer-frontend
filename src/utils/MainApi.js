@@ -1,24 +1,15 @@
 import Cookies from 'js-cookie';
 
 class MainApi {
-    constructor(baseUrl, token) {
+    constructor(baseUrl) {
         this.headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
         this._baseUrl = baseUrl;
     }
 
     getUserInfo(token) {
         return Promise.all([this.checkAuthorize(token), this.getUserMovies()]);
-    }
-
-    getUserMovies() {
-        this.url = this._baseUrl + 'movies';
-        return fetch(this.url, {
-            headers: this.headers,
-            credentials: 'include',
-        }).then(res => this._getResponseData(res))
     }
 
     register(name, email, password) {
@@ -40,12 +31,26 @@ class MainApi {
         }).then(res => this._getResponseData(res));
     }
 
+    getUserMovies() {
+        this.url = this._baseUrl + 'movies';
+        return fetch(this.url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`,
+            },
+            credentials: 'include',
+        }).then(res => this._getResponseData(res))
+    }
+
     checkAuthorize() {
         this.url = this._baseUrl + 'users/me';
         return fetch(this.url, {
             method: 'GET',
             credentials: 'include',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`,
+            },
         }).then(res => this._getResponseData(res));
     }
 
@@ -53,7 +58,10 @@ class MainApi {
         this.url = this._baseUrl + 'users/me';
         return fetch(this.url, {
             method: 'PATCH',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`,
+            },
             credentials: 'include',
             body: JSON.stringify({
                 name: data.name,
@@ -66,7 +74,10 @@ class MainApi {
         this.url = this._baseUrl + 'movies';
         return fetch(this.url, {
             method: 'POST',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`,
+            },
             credentials: 'include',
             body: JSON.stringify(movie)
         }).then(res => this._getResponseData(res));
@@ -76,7 +87,10 @@ class MainApi {
         this.url = this._baseUrl + 'movies/' + movieId;
         return fetch(this.url, {
             method: 'DELETE',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get('jwt')}`,
+            },
             credentials: 'include',
         }).then(res => this._getResponseData(res));
     }
@@ -89,4 +103,4 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/', Cookies.get('jwt'));
+export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/');

@@ -19,7 +19,16 @@ function Redact({loggedIn, onSignOut, onUpdateUser, errorMessage}) {
     const onSubmit = (data) => {
         /* Отправляем форму только если данные были изменены */
         if (data.email !== user.email || data.name !== user.name) {
-            onUpdateUser(data);
+            onUpdateUser(data).then(() => {
+                setMessage('Данные сохранены');
+            })
+                .catch((err) => {
+                    console.log(err);
+                    setMessage('Ошибка сохранения данных');
+                });
+
+            /* Чистим сообщение об ошибке через 3 сек */
+            setTimeout(() => setMessage(''), 3000);
         }
     }
 
@@ -64,7 +73,7 @@ function Redact({loggedIn, onSignOut, onUpdateUser, errorMessage}) {
                 <span className="redact__form-input-error"></span>
 
                 <div className="redact__form-submit-item">
-                    <span className="redact__form-input-message">{errorMessage}</span>
+                    <span className="redact__form-input-message">{message}</span>
                     <button type="submit" className="redact__form-submit-btn" disabled={!isValid || !isDirty}>
                         Редактировать
                     </button>

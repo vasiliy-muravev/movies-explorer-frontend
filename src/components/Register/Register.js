@@ -1,15 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AuthHeader from '../AuthHeader/AuthHeader';
 import AuthFooter from '../AuthFooter/AuthFooter';
 import {useForm} from "react-hook-form";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {useHistory} from "react-router-dom";
 
 function Register({onRegister, errorMessage}) {
+    const [message, setMessage] = useState('');
+    /* Подписываемся на контекст UserContext */
+    const user = React.useContext(CurrentUserContext);
+    const history = useHistory();
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
         mode: "onChange"
     });
     const onSubmit = (data) => {
-        onRegister(data);
+        onRegister(data).catch((err) => {
+            console.log(err);
+            if (err === 'Ошибка: 409') {
+                setMessage('Пользователь с таким email уже существует');
+            }
+        })
+
+        /* Чистим сообщение об ошибке через 3 сек */
+        setTimeout(() => setMessage(''), 3000);
     }
+
+    /* Запрещаем авторизованному пользователю страницы "Логин" и "Регистрация" */
+    useEffect(() => {
+        if (Object.keys(user).length !== 0) {
+            history.push('/');
+        }
+    }, [user]);
 
     return (
         <div className="register">
@@ -63,7 +84,7 @@ function Register({onRegister, errorMessage}) {
                         <span className="auth-field__form-input-error">{errors?.password?.message}</span>}
                 </div>
                 <div className="auth-submit__item">
-                    <span className="auth-field__form-input-error">{errorMessage}</span>
+                    <span className="auth-field__form-input-error">{message}</span>
                     <button type="submit" className="auth-submit" disabled={!isValid}>
                         Зарегистрироваться
                     </button>

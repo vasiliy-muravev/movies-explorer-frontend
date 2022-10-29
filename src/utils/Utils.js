@@ -40,3 +40,13 @@ export const getDevice = (width) => {
 
     return device;
 }
+
+export const getTimeFromMinutes = (min) => {
+    let hours = Math.trunc(min / 60);
+    let minutes = min % 60;
+    if (min < 60) {
+        return minutes + 'м';
+    } else {
+        return hours + 'ч ' + minutes + 'м';
+    }
+};
