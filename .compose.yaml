@@ -1,0 +1,9 @@
+services:
+  movies-explorer-frontend:
+    build:
+      context: .
+    container_name: movies-explorer-frontend
+    ports:
+      - "85:85"
+#    depends_on:
+#      - movies-explorer-api
