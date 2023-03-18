@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 function Footer() {
     const date = new Date().getFullYear();
@@ -14,11 +13,11 @@ function Footer() {
                     <ul className="footer__links">
                         <li className="footer__link-item">
                             <a target="_blank" href="https://practicum.yandex.ru/"
-                               className="footer__link">Яндекс.Практикум</a>
+                               rel="noreferrer" className="footer__link">Яндекс.Практикум</a>
                         </li>
                         <li className="footer__link-item">
                             <a target="_blank" href="https://github.com/vasiliy-muravev"
-                               className="footer__link">Github</a>
+                               rel="noreferrer" className="footer__link">Github</a>
                         </li>
                     </ul>
                 </nav>

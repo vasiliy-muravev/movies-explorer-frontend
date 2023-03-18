@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
 
-function Search({searchMovies}) {
-    const [searchQuery, setSearchQuery] = useState(localStorage.getItem('searchQuery') ?? '');
-    const [shortFilms, setShortFilms] = useState(localStorage.getItem('shortFilms') ?? 0);
+function SearchUserMovies({searchMovies}) {
+    const [searchQuery, setSearchQuery] = useState( '');
+    const [shortFilms, setShortFilms] = useState( 0);
 
     /* Обработчики изменения инпутов обновляют стейт */
     function handleChangeSearchQuery(e) {
         setSearchQuery(e.target.value);
-        localStorage.setItem('searchQuery', e.target.value);
     }
 
     function handleChangeShortFilms(e) {
         setShortFilms(+e.target.checked);
-        localStorage.setItem('shortFilms', +e.target.checked);
     }
 
     function handleSearch() {
@@ -53,4 +51,4 @@ function Search({searchMovies}) {
     )
 }
 
-export default Search;
+export default SearchUserMovies;

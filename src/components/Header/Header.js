@@ -7,7 +7,7 @@ function Header({loggedIn, aboutPage, onBurgerClick}) {
     return (
         <header className={`header ${aboutPage && 'header_blue'}`}>
             <Link to="/" className="header__logo"></Link>
-            <Navigation />
+            {loggedIn && <Navigation />}
             <Auth loggedIn={loggedIn} onBurgerClick={onBurgerClick}/>
         </header>
     )
