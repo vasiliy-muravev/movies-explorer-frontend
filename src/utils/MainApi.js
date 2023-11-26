@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie';
 
+const {NODE_ENV} = process.env;
+
 class MainApi {
     constructor(baseUrl) {
         this.headers = {
@@ -103,4 +105,5 @@ class MainApi {
     }
 }
 
-export const mainApi = new MainApi('https://api.vasiliymuravev.nomorepartiesxyz.ru/');
+export const mainApi = new MainApi(NODE_ENV === 'prod' ?
+    'http://movies-api.vasiliymuravev.ru/' : 'http://movies.explorer.api/');

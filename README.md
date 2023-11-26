@@ -1,13 +1,10 @@
 # movies-explorer-frontend
 
-## Ссылка на пул реквест
-https://github.com/vasiliy-muravev/movies-explorer-frontend/pull/2
-
 ## Сервер API
-https://api.vasiliymuravev.nomorepartiesxyz.ru/
+http://movies-api.vasiliymuravev.ru/
 
 ## Фронтенд
-https://vasiliymuravev.nomorepartiesxyz.ru/
+http://movies.vasiliymuravev.ru/
 
 ### Ссылка на макет (браузер) 
 
