@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-
-const {NODE_ENV} = process.env;
+import {NODE_ENV} from '../env';
+// const {NODE_ENV} = process.env;
 
 class MainApi {
     constructor(baseUrl) {
